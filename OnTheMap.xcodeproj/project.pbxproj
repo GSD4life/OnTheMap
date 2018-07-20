@@ -37,12 +37,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		19C1B30A210232C900300DB7 /* Controllers */ = {
+		19C1B30A210232C900300DB7 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				19ED262B20FE83B6009B05DD /* LoginViewController.swift */,
 			);
-			path = Controllers;
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		19C1B30B2102336F00300DB7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				19C1B30C2102339A00300DB7 /* Clients */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		19C1B30C2102339A00300DB7 /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				19C1B30D210233F300300DB7 /* Udacity */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
+		19C1B30D210233F300300DB7 /* Udacity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Udacity;
 			sourceTree = "<group>";
 		};
 		19ED261D20FE83B6009B05DD = {
@@ -66,7 +89,8 @@
 			children = (
 				19ED262920FE83B6009B05DD /* AppDelegate.swift */,
 				19C1B30821022EB700300DB7 /* GCDBlackBox.swift */,
-				19C1B30A210232C900300DB7 /* Controllers */,
+				19C1B30B2102336F00300DB7 /* Model */,
+				19C1B30A210232C900300DB7 /* View Controllers */,
 				19ED262D20FE83B6009B05DD /* Main.storyboard */,
 				19ED263020FE83B7009B05DD /* Assets.xcassets */,
 				19ED263220FE83B7009B05DD /* LaunchScreen.storyboard */,
