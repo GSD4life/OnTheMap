@@ -37,6 +37,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19C1B30A210232C900300DB7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				19ED262B20FE83B6009B05DD /* LoginViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		19ED261D20FE83B6009B05DD = {
 			isa = PBXGroup;
 			children = (
@@ -58,7 +66,7 @@
 			children = (
 				19ED262920FE83B6009B05DD /* AppDelegate.swift */,
 				19C1B30821022EB700300DB7 /* GCDBlackBox.swift */,
-				19ED262B20FE83B6009B05DD /* LoginViewController.swift */,
+				19C1B30A210232C900300DB7 /* Controllers */,
 				19ED262D20FE83B6009B05DD /* Main.storyboard */,
 				19ED263020FE83B7009B05DD /* Assets.xcassets */,
 				19ED263220FE83B7009B05DD /* LaunchScreen.storyboard */,
