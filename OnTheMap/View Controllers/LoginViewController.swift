@@ -15,6 +15,11 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var logInButton: UIButton!
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var debugTextLabel: UILabel!
+    
+    
     
     // Mark: Lifecycle
     override func viewDidLoad() {
