@@ -10,28 +10,116 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    // Mark: IBOutlets
+    var keyboardOnScreen = false
+    
+    // Mark: Outlets
+    
+    @IBOutlet var udacityImageView: UIView!
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
-    
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var debugTextLabel: UILabel!
     
-    
-    
     // Mark: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        debugTextLabel.text = ""
     }
 
+}
+
+    // Mark: - LoginViewController: UITextFieldDelegate
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    // Mark: UITextFieldDelegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // Mark: Show/Hide Keyboard
+    
+    func keyboardWillShow(_ notification: Notification) {
+        if !keyboardOnScreen {
+            view.frame.origin.y -= keyboardHeight(notification)
+            udacityImageView.isHidden = true
+        }
+    }
+    
+    func keyboardWillHide(_ notification: Notification) {
+        if keyboardOnScreen {
+            view.frame.origin.y += keyboardHeight(notification)
+            udacityImageView.isHidden = false
+        }
+    }
+    
+    func keyboardDidShow(_ notification: Notification) {
+        keyboardOnScreen = true
+    }
+    
+    func keyboardDidHide(_ notification: Notification) {
+        keyboardOnScreen = false
+    }
+    
+    private func keyboardHeight(_ notification: Notification) -> CGFloat {
+        let userInfo = (notification as NSNotification).userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.cgRectValue.height
+    }
+    
+    private func resignIfFirstResponder(_ textField: UITextField) {
+        if textField.isFirstResponder {
+            textField.resignFirstResponder()
+        }
+    }
+    
+    @IBAction func userDidTapView(_ sender: AnyObject) {
+        resignIfFirstResponder(emailTextField)
+        resignIfFirstResponder(passwordTextField)
+    }
+}
+
+// Mark: - LoginViewController (Notifications)
+
+private extension LoginViewController {
+    
+    func subscribeToNotification(_ notification: NSNotification.Name, selector: Selector) {
+        NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
+    }
+    
+    func unsubscribeFromAllNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+}
+
+
+// Mark: - LoginViewController (Configure UI)
+
+private extension LoginViewController {
+    
+    func setUIEnabled(_ enabled: Bool) {
+        emailTextField.isEnabled = enabled
+        passwordTextField.isEnabled = enabled
+        logInButton.isEnabled = enabled
+        debugTextLabel.text = ""
+        debugTextLabel.isEnabled = enabled
+        
+        // adjust login button alpha
+        if enabled {
+            logInButton.alpha = 1.0
+        } else {
+            logInButton.alpha = 0.5
+        }
+  }
 
 }
 

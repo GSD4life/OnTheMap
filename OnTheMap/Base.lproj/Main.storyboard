@@ -52,6 +52,9 @@
                                 <state key="normal" title="LOG IN">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="userDidTapView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nV8-Km-WwJ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -83,6 +86,7 @@
                         <outlet property="logInButton" destination="KV1-4s-9Z8" id="fpB-9F-Vc1"/>
                         <outlet property="passwordTextField" destination="Gab-gv-uTz" id="Osi-RB-s4R"/>
                         <outlet property="signUpButton" destination="rPh-c8-yNb" id="7L3-8S-Uqs"/>
+                        <outlet property="udacityImageView" destination="ddx-MP-kxo" id="77V-QP-Q86"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
