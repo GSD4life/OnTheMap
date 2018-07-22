@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     // Mark: Outlets
     
     @IBOutlet var udacityImageView: UIView!
+    @IBOutlet weak var loginToUdacityLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var logInButton: UIButton!
