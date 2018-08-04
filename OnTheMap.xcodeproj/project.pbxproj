@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		197AC5912115E90700B0EBD4 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197AC5902115E90700B0EBD4 /* UdacityClient.swift */; };
+		197AC5932115E93200B0EBD4 /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197AC5922115E93200B0EBD4 /* UdacityConstants.swift */; };
 		19C1B30921022EB700300DB7 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C1B30821022EB700300DB7 /* GCDBlackBox.swift */; };
 		19ED262A20FE83B6009B05DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED262920FE83B6009B05DD /* AppDelegate.swift */; };
 		19ED262C20FE83B6009B05DD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED262B20FE83B6009B05DD /* LoginViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		197AC5902115E90700B0EBD4 /* UdacityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
+		197AC5922115E93200B0EBD4 /* UdacityConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
 		19C1B30821022EB700300DB7 /* GCDBlackBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		19ED262620FE83B6009B05DD /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19ED262920FE83B6009B05DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -37,35 +41,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		197AC58D2115E72800B0EBD4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				197AC58E2115E74E00B0EBD4 /* Clients */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		197AC58E2115E74E00B0EBD4 /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				197AC58F2115E79D00B0EBD4 /* Udacity */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
+		197AC58F2115E79D00B0EBD4 /* Udacity */ = {
+			isa = PBXGroup;
+			children = (
+				197AC5902115E90700B0EBD4 /* UdacityClient.swift */,
+				197AC5922115E93200B0EBD4 /* UdacityConstants.swift */,
+			);
+			path = Udacity;
+			sourceTree = "<group>";
+		};
 		19C1B30A210232C900300DB7 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				19ED262B20FE83B6009B05DD /* LoginViewController.swift */,
 			);
 			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		19C1B30B2102336F00300DB7 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				19C1B30C2102339A00300DB7 /* Clients */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		19C1B30C2102339A00300DB7 /* Clients */ = {
-			isa = PBXGroup;
-			children = (
-				19C1B30D210233F300300DB7 /* Udacity */,
-			);
-			path = Clients;
-			sourceTree = "<group>";
-		};
-		19C1B30D210233F300300DB7 /* Udacity */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Udacity;
 			sourceTree = "<group>";
 		};
 		19ED261D20FE83B6009B05DD = {
@@ -89,7 +95,7 @@
 			children = (
 				19ED262920FE83B6009B05DD /* AppDelegate.swift */,
 				19C1B30821022EB700300DB7 /* GCDBlackBox.swift */,
-				19C1B30B2102336F00300DB7 /* Model */,
+				197AC58D2115E72800B0EBD4 /* Model */,
 				19C1B30A210232C900300DB7 /* View Controllers */,
 				19ED262D20FE83B6009B05DD /* Main.storyboard */,
 				19ED263020FE83B7009B05DD /* Assets.xcassets */,
@@ -170,6 +176,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				197AC5912115E90700B0EBD4 /* UdacityClient.swift in Sources */,
+				197AC5932115E93200B0EBD4 /* UdacityConstants.swift in Sources */,
 				19ED262C20FE83B6009B05DD /* LoginViewController.swift in Sources */,
 				19C1B30921022EB700300DB7 /* GCDBlackBox.swift in Sources */,
 				19ED262A20FE83B6009B05DD /* AppDelegate.swift in Sources */,
