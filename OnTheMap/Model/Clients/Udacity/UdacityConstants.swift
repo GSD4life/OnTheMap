@@ -7,15 +7,18 @@
 //
 
 import Foundation
+extension UdacityClient {
 
-
+// Mark: Constants
 struct Constants {
-    
-    // Mark: Udacity
-    struct URL {
         static let ApiScheme = "https"
         static let ApiHost = "www.udacity.com"
         static let ApiPath = "/api"
 }
-
+    struct ParameterKeys {
+        static let Username = "username"
+        static let Password = "password"
+}
+    
+    
 }

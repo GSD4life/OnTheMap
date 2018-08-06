@@ -11,13 +11,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    // MARK: Properties
-    
-    var window: UIWindow?
-    
-    var udacitySessionURL = "https://www.udacity.com/api/session"
-    var username: String?
-    var password: String?
+ var window: UIWindow?
     
     // MARK: UIApplicationDelegate
     

@@ -11,6 +11,8 @@ import UIKit
 class LoginViewController: UIViewController {
     
     var keyboardOnScreen = false
+    var appDelegate: AppDelegate!
+    
     
     // Mark: Outlets
     
@@ -26,15 +28,45 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        
+        subscribeToNotification(.UIKeyboardWillShow, selector: #selector(keyboardWillShow))
+        subscribeToNotification(.UIKeyboardWillHide, selector: #selector(keyboardWillHide))
+        subscribeToNotification(.UIKeyboardDidShow, selector: #selector(keyboardDidShow))
+        subscribeToNotification(.UIKeyboardDidHide, selector: #selector(keyboardDidHide))
         // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         debugTextLabel.text = ""
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeFromAllNotifications()
     }
 
-}
+    @IBAction func loginPressed(_ sender: AnyObject) {
+        userDidTapView(self)
+        
+        if  emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
+            debugTextLabel.text = "Username or Password Empty."
+        } else {
+            setUIEnabled(false)
+       //     UdacityClient.sharedInstance().login(completionHandlerForLogin: <#T##([String : AnyObject]?, NSError?) -> Void#>)
+    
+            }
+        }
+     }
+
+
+
+
+
 
     // Mark: - LoginViewController: UITextFieldDelegate
 
@@ -49,25 +81,25 @@ extension LoginViewController: UITextFieldDelegate {
     
     // Mark: Show/Hide Keyboard
     
-    func keyboardWillShow(_ notification: Notification) {
+    @objc func keyboardWillShow(_ notification: Notification) {
         if !keyboardOnScreen {
             view.frame.origin.y -= keyboardHeight(notification)
             udacityImageView.isHidden = true
         }
     }
     
-    func keyboardWillHide(_ notification: Notification) {
+    @objc func keyboardWillHide(_ notification: Notification) {
         if keyboardOnScreen {
             view.frame.origin.y += keyboardHeight(notification)
             udacityImageView.isHidden = false
         }
     }
     
-    func keyboardDidShow(_ notification: Notification) {
+    @objc func keyboardDidShow(_ notification: Notification) {
         keyboardOnScreen = true
     }
     
-    func keyboardDidHide(_ notification: Notification) {
+    @objc func keyboardDidHide(_ notification: Notification) {
         keyboardOnScreen = false
     }
     
@@ -105,7 +137,7 @@ private extension LoginViewController {
 
 // Mark: - LoginViewController (Configure UI)
 
-private extension LoginViewController {
+ extension LoginViewController {
     
     func setUIEnabled(_ enabled: Bool) {
         emailTextField.isEnabled = enabled
@@ -123,4 +155,5 @@ private extension LoginViewController {
   }
 
 }
+
 
