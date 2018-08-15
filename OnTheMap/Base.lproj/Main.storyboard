@@ -116,6 +116,9 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="TI0-9o-Cwt" kind="relationship" relationship="rootViewController" id="WMK-59-5Xm"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ap1-qg-hyO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -157,6 +160,7 @@
         <scene sceneID="GfX-yt-z5D">
             <objects>
                 <tabBarController id="TI0-9o-Cwt" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="iWv-Z2-2Kb"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tvk-lG-FPp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

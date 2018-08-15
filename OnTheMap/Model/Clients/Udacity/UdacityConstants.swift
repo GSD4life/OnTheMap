@@ -6,7 +6,7 @@
 //  Copyright © 2018 Shane Sealy. All rights reserved.
 //
 
-import Foundation
+import UIKit
 extension UdacityClient {
 
 // Mark: Constants
@@ -14,10 +14,6 @@ struct Constants {
         static let ApiScheme = "https"
         static let ApiHost = "www.udacity.com"
         static let ApiPath = "/api"
-}
-    struct ParameterKeys {
-        static let Username = "username"
-        static let Password = "password"
 }
     
     

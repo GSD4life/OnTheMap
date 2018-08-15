@@ -8,11 +8,11 @@
 
 import UIKit
 
+
 class LoginViewController: UIViewController {
     
     var keyboardOnScreen = false
     var appDelegate: AppDelegate!
-    
     
     // Mark: Outlets
     
@@ -45,9 +45,19 @@ class LoginViewController: UIViewController {
         
     }
     
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromAllNotifications()
+    }
+    
+    func completeLogin(_ sender: Any) {
+        performUIUpdatesOnMain {
+            self.debugTextLabel.text = ""
+            self.setUIEnabled(true)
+            let controller = self.storyboard!.instantiateViewController(withIdentifier: "ManagerNavigationController") as! UINavigationController
+            self.present(controller, animated: true, completion: nil)
+        }
     }
 
     @IBAction func loginPressed(_ sender: AnyObject) {
@@ -57,15 +67,26 @@ class LoginViewController: UIViewController {
             debugTextLabel.text = "Username or Password Empty."
         } else {
             setUIEnabled(false)
-       //     UdacityClient.sharedInstance().login(completionHandlerForLogin: <#T##([String : AnyObject]?, NSError?) -> Void#>)
-    
+            UdacityClient.sharedInstance().login(email: emailTextField.text!, password: passwordTextField.text!, completionHandlerForLogin: { (data, error) in
+                self.setUIEnabled(true)
+            
+            if error != nil {
+                
+                
+                self.presentAlert(title: "Login Fail", message: error!) { (alert) in
+                    self.setUIEnabled(true)
+                }
+                
+            } else {
+            
+                self.completeLogin(data!)
+            }
+
+        })
+            
             }
         }
      }
-
-
-
-
 
 
     // Mark: - LoginViewController: UITextFieldDelegate
@@ -137,7 +158,7 @@ private extension LoginViewController {
 
 // Mark: - LoginViewController (Configure UI)
 
- extension LoginViewController {
+private extension LoginViewController {
     
     func setUIEnabled(_ enabled: Bool) {
         emailTextField.isEnabled = enabled
@@ -153,6 +174,8 @@ private extension LoginViewController {
             logInButton.alpha = 0.5
         }
   }
+    
+    
 
 }
 

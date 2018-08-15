@@ -6,21 +6,24 @@
 //  Copyright © 2018 Shane Sealy. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
+class UdacityClient: NSObject {
 
-class UdacityClient: LoginViewController {
     
+   var emailTextField = UITextField()
+   var passwordTextField = UITextField()
+   var debugTextLabel = UILabel()
 
-    func login(completionHandlerForLogin: @escaping (_ result: [String:AnyObject]?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    func login(email: String, password: String, completionHandlerForLogin: @escaping (_ result: [String:AnyObject]?, _ error: NSError?) -> Void) -> URLSessionDataTask {
     
         /* 1. Set the parameters */
         var udacityParameters = [String:AnyObject]()
-        udacityParameters[ParameterKeys.Username] = emailTextField.text as AnyObject?
-        udacityParameters[ParameterKeys.Password] = passwordTextField.text as AnyObject?
+        udacityParameters[email] = emailTextField.text as AnyObject?
+        udacityParameters[password] = passwordTextField.text as AnyObject?
         
         /* 2/3. Build the URL, Configure the request */
-        let request = NSMutableURLRequest(url: URLFromParameters(udacityParameters, withPathExtension: "/(session"))
+        let request = NSMutableURLRequest(url: URLFromParameters(udacityParameters, withPathExtension: "/session"))
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -32,10 +35,6 @@ class UdacityClient: LoginViewController {
             
             func sendError(_ error: String) {
                 print(error)
-                performUIUpdatesOnMain {
-                    self.setUIEnabled(true)
-                    self.debugTextLabel.text = "Login Failed"
-                }
                 let userInfo = [NSLocalizedDescriptionKey : error]
                 completionHandlerForLogin(nil, NSError(domain: "login", code: 1, userInfo: userInfo))
             }
@@ -64,6 +63,7 @@ class UdacityClient: LoginViewController {
             let range = Range(5..<data.count)
             let newData = data.subdata(in: range) /* subset response data! */
             print(String(data: newData, encoding: .utf8)!)
+            
         }
         
         /* 7. Start the request */
@@ -79,7 +79,8 @@ class UdacityClient: LoginViewController {
     
         var parsedResult: [String:AnyObject]! = nil
     do {
-        parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
+        parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as?
+            [String:AnyObject]
     } catch {
         let userInfo = [NSLocalizedDescriptionKey : "Could not parse the data as JSON: '\(data)'"]
         completionHandlerForConvertData(nil, NSError(domain: "convertDataWithCompletionHandler", code: 1, userInfo: userInfo))
