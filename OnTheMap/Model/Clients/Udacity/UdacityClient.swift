@@ -9,25 +9,20 @@
 import UIKit
 
 class UdacityClient: NSObject {
-
     
-   var emailTextField = UITextField()
-   var passwordTextField = UITextField()
-   var debugTextLabel = UILabel()
-
-    func login(email: String, password: String, completionHandlerForLogin: @escaping (_ result: [String:AnyObject]?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    var debugTextLabel = UILabel()
     
+    func login(email: String, password: String, completionHandlerForLogin: @escaping (_ result: [String:AnyObject]?, _ error: NSError?) -> Void) -> Void {
+        
         /* 1. Set the parameters */
-        var udacityParameters = [String:AnyObject]()
-        udacityParameters[email] = emailTextField.text as AnyObject?
-        udacityParameters[password] = passwordTextField.text as AnyObject?
         
         /* 2/3. Build the URL, Configure the request */
-        let request = NSMutableURLRequest(url: URLFromParameters(udacityParameters, withPathExtension: "/session"))
+        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"udacity\": {\"username\": \(String(describing: emailTextField.text))\", \"password\": \(String(describing: passwordTextField.text))\"}}".data(using: .utf8)
+        
+        request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: .utf8)
         
         /* 4. Make the request */
         let session = URLSession.shared
@@ -56,56 +51,36 @@ class UdacityClient: NSObject {
                 sendError("No data was returned by the request!")
                 return
             }
-            
-            /* 5/6. Parse the data and use the data (happens in completion handler) */
-            self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForLogin)
-            
             let range = Range(5..<data.count)
             let newData = data.subdata(in: range) /* subset response data! */
             print(String(data: newData, encoding: .utf8)!)
+            /* 5/6. Parse the data and use the data (happens in completion handler) */
+            self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandlerForLogin)
             
         }
         
         /* 7. Start the request */
         task.resume()
         
-        return task
-}
-// Mark: Helpers
-
-
-// given raw JSON, return a usable Foundation object
+    }
+    
+    // Mark: Helpers
+    
+    // given raw JSON, return a usable Foundation object
     private func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: [String:AnyObject]?, _ error: NSError?) -> Void) {
-    
-        var parsedResult: [String:AnyObject]! = nil
-    do {
-        parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as?
-            [String:AnyObject]
-    } catch {
-        let userInfo = [NSLocalizedDescriptionKey : "Could not parse the data as JSON: '\(data)'"]
-        completionHandlerForConvertData(nil, NSError(domain: "convertDataWithCompletionHandler", code: 1, userInfo: userInfo))
-    }
-    
-        completionHandlerForConvertData(parsedResult, nil)
         
-}
-
-// create a URL from parameters
-private func URLFromParameters(_ parameters: [String:AnyObject], withPathExtension: String? = nil) -> URL {
-    
-    var components = URLComponents()
-    components.scheme = Constants.ApiScheme
-    components.host = Constants.ApiHost
-    components.path = Constants.ApiPath + (withPathExtension ?? "")
-    components.queryItems = [URLQueryItem]()
-    
-    for (key, value) in parameters {
-        let queryItem = URLQueryItem(name: key, value: "\(value)")
-        components.queryItems!.append(queryItem)
+        var parsedResult: [String:AnyObject]! = nil
+        do {
+            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as?
+                [String:AnyObject]
+        } catch {
+            let userInfo = [NSLocalizedDescriptionKey : "Could not parse the data as JSON: '\(data)'"]
+            completionHandlerForConvertData(nil, NSError(domain: "convertDataWithCompletionHandler", code: 1, userInfo: userInfo))
+        }
+        
+        completionHandlerForConvertData(parsedResult, nil)
     }
     
-    return components.url!
-}
     // Mark: Shared Instance
     
     class func sharedInstance() -> UdacityClient {
@@ -115,3 +90,4 @@ private func URLFromParameters(_ parameters: [String:AnyObject], withPathExtensi
         return Singleton.sharedInstance
     }
 }
+

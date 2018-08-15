@@ -53,8 +53,6 @@ class LoginViewController: UIViewController {
     
     func completeLogin(_ sender: Any) {
         performUIUpdatesOnMain {
-            //self.emailTextField.text = ""
-            //self.passwordTextField.text = ""
             self.debugTextLabel.text = ""
             self.setUIEnabled(true)
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "ManagerNavigationController") as! UINavigationController
@@ -69,9 +67,10 @@ class LoginViewController: UIViewController {
             debugTextLabel.text = "Username or Password Empty."
         } else {
             setUIEnabled(false)
-            UdacityClient.sharedInstance().login(email: emailTextField.text!, password: passwordTextField.text!, completionHandlerForLogin: { (data, error) in
+             UdacityClient.sharedInstance().login(email: emailTextField.text!, password: passwordTextField.text!, completionHandlerForLogin: { (data, error) in
                 self.setUIEnabled(true)
-            
+                
+                
             if error != nil {
                 
                 let alert = UIAlertController(title: "Login Failed", message: "Do you want to try again as the e-mail or password entered is incorrect.", preferredStyle: .alert)
