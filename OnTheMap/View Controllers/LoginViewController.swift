@@ -165,18 +165,22 @@ private extension LoginViewController {
 private extension LoginViewController {
     
     func setUIEnabled(_ enabled: Bool) {
-        emailTextField.isEnabled = enabled
-        passwordTextField.isEnabled = enabled
-        logInButton.isEnabled = enabled
-        debugTextLabel.text = ""
-        debugTextLabel.isEnabled = enabled
         
-        // adjust login button alpha
-        if enabled {
-            logInButton.alpha = 1.0
-        } else {
-            logInButton.alpha = 0.5
+        performUIUpdatesOnMain {
+        self.emailTextField.isEnabled = enabled
+        self.passwordTextField.isEnabled = enabled
+        self.logInButton.isEnabled = enabled
+        self.debugTextLabel.text = ""
+        self.debugTextLabel.isEnabled = enabled
+        
+            if enabled {
+            self.logInButton.alpha = 1.0
+            } else {
+            self.logInButton.alpha = 0.5
+            }
         }
+        
+    
   }
     
     
