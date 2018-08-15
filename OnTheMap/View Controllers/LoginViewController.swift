@@ -53,6 +53,8 @@ class LoginViewController: UIViewController {
     
     func completeLogin(_ sender: Any) {
         performUIUpdatesOnMain {
+            //self.emailTextField.text = ""
+            //self.passwordTextField.text = ""
             self.debugTextLabel.text = ""
             self.setUIEnabled(true)
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "ManagerNavigationController") as! UINavigationController
@@ -72,10 +74,12 @@ class LoginViewController: UIViewController {
             
             if error != nil {
                 
+                let alert = UIAlertController(title: "Login Failed", message: "Do you want to try again as the e-mail or password entered is incorrect.", preferredStyle: .alert)
                 
-                self.presentAlert(title: "Login Fail", message: error!) { (alert) in
-                    self.setUIEnabled(true)
-                }
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+                
+                self.present(alert, animated: true)
                 
             } else {
             
