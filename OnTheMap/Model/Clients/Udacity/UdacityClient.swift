@@ -12,7 +12,7 @@ class UdacityClient: NSObject {
     
     var debugTextLabel = UILabel()
     
-    func login(email: String, password: String, completionHandlerForLogin: @escaping (_ result: [String:AnyObject]?, _ error: NSError?) -> Void) -> Void {
+    func login(email: String, password: String, completionHandlerForLogin: @escaping (_ result: Any?, _ error: NSError?) -> Void) -> Void {
         
         /* 1. Set the parameters */
         
@@ -54,9 +54,9 @@ class UdacityClient: NSObject {
             let range = Range(5..<data.count)
             let newData = data.subdata(in: range) /* subset response data! */
             print(String(data: newData, encoding: .utf8)!)
+           
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandlerForLogin)
-            
         }
         
         /* 7. Start the request */
@@ -64,7 +64,7 @@ class UdacityClient: NSObject {
         
     }
     
-    func logout(completionHandlerToLogout: @escaping (_ result: [String:AnyObject]?, _ error: NSError?) -> Void) -> Void {
+    func logout(completionHandlerToLogout: @escaping (_ result: Any?, _ error: NSError?) -> Void) -> Void {
         
         var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
         request.httpMethod = "DELETE"
@@ -113,16 +113,56 @@ class UdacityClient: NSObject {
         
     }
     
+    func getUserData(completionHandlerToGetData: @escaping (_ result: Any?, _ error: NSError?) -> Void) -> Void {
+    let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/3903878747")!)
+    let session = URLSession.shared
+    let task = session.dataTask(with: request) { data, response, error in
+        
+        func sendError(_ error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey: error]
+            completionHandlerToGetData(nil, NSError(domain: "getUserData", code: 1, userInfo: userInfo))
+        }
+        
+        /* GUARD: Was there an error? */
+        guard (error == nil) else {
+            sendError("There was an error with your request: \(error!)")
+            return
+        }
+        
+        /* GUARD: Did we get a successful 2XX response? */
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+            sendError("Your request returned a status code other than 2xx!")
+            return
+        }
+        
+        /* GUARD: Was there any data returned? */
+        guard let data = data else {
+            sendError("No data was returned by the request!")
+            return
+        }
+        let range = Range(5..<data.count)
+        let newData = data.subdata(in: range) /* subset response data! */
+        print(String(data: newData, encoding: .utf8)!)
+        
+        self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandlerToGetData)
+        
+        }
+        
+        task.resume()
+        
+    }
+    
+    
     
     // Mark: Helpers
     
     // given raw JSON, return a usable Foundation object
-    private func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: [String:AnyObject]?, _ error: NSError?) -> Void) {
+    private func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: Any?, _ error: NSError?) -> Void) {
         
-        var parsedResult: [String:AnyObject]! = nil
+        var parsedResult: Any! = nil
         do {
-            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as?
-                [String:AnyObject]
+            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
         } catch {
             let userInfo = [NSLocalizedDescriptionKey : "Could not parse the data as JSON: '\(data)'"]
             completionHandlerForConvertData(nil, NSError(domain: "convertDataWithCompletionHandler", code: 1, userInfo: userInfo))

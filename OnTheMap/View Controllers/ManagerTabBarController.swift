@@ -32,8 +32,7 @@ var refresh = UIButton()
         
         
         navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: plusSignbutton), UIBarButtonItem(customView: refreshButton)]
-    
-    
+
         
     }
     
