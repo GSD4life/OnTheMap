@@ -24,6 +24,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var debugTextLabel: UILabel!
     
+
+    
     // Mark: Lifecycle
     
     override func viewDidLoad() {
@@ -51,6 +53,7 @@ class LoginViewController: UIViewController {
         unsubscribeFromAllNotifications()
     }
     
+    
     func completeLogin(_ sender: Any) {
         performUIUpdatesOnMain {
             self.debugTextLabel.text = ""
@@ -59,6 +62,7 @@ class LoginViewController: UIViewController {
             self.present(controller, animated: true, completion: nil)
         }
     }
+    
 
     @IBAction func loginPressed(_ sender: AnyObject) {
         userDidTapView(self)
@@ -70,7 +74,6 @@ class LoginViewController: UIViewController {
              UdacityClient.sharedInstance().login(email: emailTextField.text!, password: passwordTextField.text!, completionHandlerForLogin: { (data, error) in
                 self.setUIEnabled(true)
                 
-                
             if error != nil {
                 
                 let alert = UIAlertController(title: "Login Failed", message: "Do you want to try again as the e-mail or password entered is incorrect.", preferredStyle: .alert)
@@ -81,8 +84,9 @@ class LoginViewController: UIViewController {
                 self.present(alert, animated: true)
                 
             } else {
-            
-                self.completeLogin(data!)
+        
+                self.getUserInfo()
+                
             }
 
         })
@@ -91,6 +95,19 @@ class LoginViewController: UIViewController {
         }
      }
 
+extension LoginViewController {
+    
+    func getUserInfo() {
+        UdacityClient.sharedInstance().getUserData { (data, error) in
+            if error != nil {
+                print(error)
+            } else {
+             self.completeLogin(data)
+            }
+    }
+ }
+
+}
 
     // Mark: - LoginViewController: UITextFieldDelegate
 
@@ -182,8 +199,8 @@ private extension LoginViewController {
     
   }
     
-    
+            
+        }
 
-}
 
 

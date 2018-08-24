@@ -64,6 +64,8 @@ class UdacityClient: NSObject {
         
     }
     
+    
+    
     func logout(completionHandlerToLogout: @escaping (_ result: Any?, _ error: NSError?) -> Void) -> Void {
         
         var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
@@ -114,7 +116,7 @@ class UdacityClient: NSObject {
     }
     
     func getUserData(completionHandlerToGetData: @escaping (_ result: Any?, _ error: NSError?) -> Void) -> Void {
-    let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/3903878747")!)
+    let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/me")!)
     let session = URLSession.shared
     let task = session.dataTask(with: request) { data, response, error in
         
@@ -152,8 +154,6 @@ class UdacityClient: NSObject {
         task.resume()
         
     }
-    
-    
     
     // Mark: Helpers
     
