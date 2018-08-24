@@ -15,11 +15,11 @@ var refresh = UIButton()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tabBarButtons()
+        navigationBarButtons()
         
     }
     
-    func tabBarButtons() {
+    func navigationBarButtons() {
         navigationItem.title = "On The Map"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "logout", style: .plain, target: self, action: #selector(logout))
         
