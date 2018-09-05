@@ -100,7 +100,7 @@ extension LoginViewController {
     func getUserInfo() {
         UdacityClient.sharedInstance().getUserData { (data, error) in
             if error != nil {
-                print(error)
+                print(error ?? "empty error")
             } else {
              self.completeLogin(data)
             }
