@@ -10,7 +10,7 @@ import UIKit
 
 class UdacityClient: NSObject {
     
-    var debugTextLabel = UILabel()
+   // var debugTextLabel = UILabel()
     
     func login(email: String, password: String, completionHandlerForLogin: @escaping (_ result: Any?, _ error: NSError?) -> Void) -> Void {
         

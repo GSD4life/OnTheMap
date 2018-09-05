@@ -86,7 +86,7 @@ class LoginViewController: UIViewController {
             } else {
         
                 self.getUserInfo()
-                
+        
             }
 
         })
