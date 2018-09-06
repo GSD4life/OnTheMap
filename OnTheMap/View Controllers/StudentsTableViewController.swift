@@ -17,7 +17,6 @@ class StudentsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-
        
     }
 
@@ -56,17 +55,24 @@ class StudentsTableViewController: UITableViewController {
         let item = self.studentData[indexPath.row]
         guard let firstName = item.firstName else {return cell}
         guard let lastName = item.lastName else {return cell}
+        guard let mediaURL = item.mediaURL else {return cell}
         cell.imageView?.image = #imageLiteral(resourceName: "icon_pin")
         cell.textLabel?.text = "\(firstName) \(lastName)"
-        cell.detailTextLabel?.text = item.mediaURL
+        cell.detailTextLabel?.text = mediaURL
         cell.imageView?.contentMode = UIViewContentMode.scaleAspectFit
         
        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ManagerTabBarController") as! ManagerTabBarController
-        navigationController?.pushViewController(vc, animated: true)
+        
+        let web = self.studentData[indexPath.row]
+        guard let webAddress = web.mediaURL else {return}
+        
+        let app = UIApplication.shared
+        app.openURL(URL(string: webAddress)!)
+        
+
     }
     
     
