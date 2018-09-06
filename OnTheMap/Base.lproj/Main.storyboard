@@ -144,16 +144,16 @@
             </objects>
             <point key="canvasLocation" x="1406" y="48"/>
         </scene>
-        <!--List-->
+        <!--StudentsTableViewController-->
         <scene sceneID="G7G-4M-uSN">
             <objects>
-                <tableViewController id="Ed8-R5-OnY" customClass="StudentsTableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="eKj-vn-Ys1" customClass="StudentsTableView" customModule="OnTheMap" customModuleProvider="target">
+                <tableViewController storyboardIdentifier="StudentsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ed8-R5-OnY" userLabel="StudentsTableViewController" customClass="StudentsTableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="eKj-vn-Ys1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PinCell" textLabel="ymm-GL-UpU" detailTextLabel="uGD-aV-ATL" style="IBUITableViewCellStyleSubtitle" id="ggh-Md-bbV" customClass="f">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PinCell" textLabel="ymm-GL-UpU" detailTextLabel="uGD-aV-ATL" style="IBUITableViewCellStyleSubtitle" id="ggh-Md-bbV">
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ggh-Md-bbV" id="PFj-Bi-UzC">
@@ -185,6 +185,9 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="List" image="icon_listview-deselected" id="rbK-ao-vRG"/>
                     <navigationItem key="navigationItem" id="DCb-YW-COR"/>
+                    <connections>
+                        <outlet property="mapsTableView" destination="eKj-vn-Ys1" id="AOP-HM-Ruq"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lin-S5-cCA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

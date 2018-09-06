@@ -56,6 +56,7 @@ override func viewDidLoad() {
                         print(String(describing:annotation.title))
                         // Finally we place the annotation in an array of annotations.
                         annotations.append(annotation)
+                    
                     }
                     self.mapView.addAnnotations(annotations)
                 }
@@ -102,3 +103,5 @@ func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, callou
         }
     }
 }
+
+
