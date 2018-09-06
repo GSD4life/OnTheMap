@@ -36,6 +36,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rPh-c8-yNb">
                                 <rect key="frame" x="65" y="254" width="219" height="30"/>
                                 <state key="normal" title="Don't have an account? Sign Up"/>
+                                <connections>
+                                    <action selector="signUPButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="clA-aD-JA4"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KV1-4s-9Z8">
                                 <rect key="frame" x="90" y="216" width="168" height="30"/>

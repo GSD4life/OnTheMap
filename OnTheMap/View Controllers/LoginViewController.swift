@@ -25,6 +25,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var debugTextLabel: UILabel!
     
 
+    @IBAction func signUPButton(_ sender: Any) {
+        let app = UIApplication.shared
+        app.openURL(URL(string: "https://www.udacity.com")!)
+    }
     
     // Mark: Lifecycle
     
