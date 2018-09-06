@@ -12,7 +12,7 @@ class UdacityClient: NSObject {
     
    // var debugTextLabel = UILabel()
     
-    func login(email: String, password: String, completionHandlerForLogin: @escaping (_ result: Any?, _ error: NSError?) -> Void) -> Void {
+    func login(email: String, password: String, completionHandlerForLogin: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> Void {
         
         /* 1. Set the parameters */
         
@@ -66,7 +66,7 @@ class UdacityClient: NSObject {
     
     
     
-    func logout(completionHandlerToLogout: @escaping (_ result: Any?, _ error: NSError?) -> Void) -> Void {
+    func logout(completionHandlerToLogout: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> Void {
         
         var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
         request.httpMethod = "DELETE"
@@ -115,7 +115,7 @@ class UdacityClient: NSObject {
         
     }
     
-    func getUserData(completionHandlerToGetData: @escaping (_ result: Any?, _ error: NSError?) -> Void) -> Void {
+    func getUserData(completionHandlerToGetData: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> Void {
     let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/me")!)
     let session = URLSession.shared
     let task = session.dataTask(with: request) { data, response, error in
@@ -158,11 +158,11 @@ class UdacityClient: NSObject {
     // Mark: Helpers
     
     // given raw JSON, return a usable Foundation object
-    private func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: Any?, _ error: NSError?) -> Void) {
+    private func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
         
-        var parsedResult: Any! = nil
+        var parsedResult: AnyObject! = nil
         do {
-            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject
         } catch {
             let userInfo = [NSLocalizedDescriptionKey : "Could not parse the data as JSON: '\(data)'"]
             completionHandlerForConvertData(nil, NSError(domain: "convertDataWithCompletionHandler", code: 1, userInfo: userInfo))

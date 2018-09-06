@@ -43,7 +43,7 @@ var refresh = UIButton()
     
     
     @objc func logout() {
-     UdacityClient.sharedInstance().logout(completionHandlerToLogout: { (data, error) in
+     UdacityClient.sharedInstance().logout { (data, error) in
         
         if error != nil {
             
@@ -61,7 +61,7 @@ var refresh = UIButton()
         
         
         }
-    )}
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

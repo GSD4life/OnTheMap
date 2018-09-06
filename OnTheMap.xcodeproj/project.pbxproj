@@ -15,6 +15,7 @@
 		19C90FB4213079D700607499 /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C90FB3213079D700607499 /* ParseConstants.swift */; };
 		19C90FB6213080BB00607499 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C90FB5213080BB00607499 /* ParseClient.swift */; };
 		19CF71E721401145004CA108 /* ParseConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CF71E621401145004CA108 /* ParseConvenience.swift */; };
+		19CF71E92140A285004CA108 /* StudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CF71E82140A285004CA108 /* StudentsTableViewController.swift */; };
 		19E3E6F7212C58B200308D54 /* ManagerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E3E6F6212C58B200308D54 /* ManagerTabBarController.swift */; };
 		19ED262A20FE83B6009B05DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED262920FE83B6009B05DD /* AppDelegate.swift */; };
 		19ED262C20FE83B6009B05DD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ED262B20FE83B6009B05DD /* LoginViewController.swift */; };
@@ -32,6 +33,7 @@
 		19C90FB3213079D700607499 /* ParseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
 		19C90FB5213080BB00607499 /* ParseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		19CF71E621401145004CA108 /* ParseConvenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseConvenience.swift; sourceTree = "<group>"; };
+		19CF71E82140A285004CA108 /* StudentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
 		19E3E6F6212C58B200308D54 /* ManagerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTabBarController.swift; sourceTree = "<group>"; };
 		19ED262620FE83B6009B05DD /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19ED262920FE83B6009B05DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				19ED262B20FE83B6009B05DD /* LoginViewController.swift */,
 				191B3148212AF4D9009EA15D /* MapViewController.swift */,
 				19E3E6F6212C58B200308D54 /* ManagerTabBarController.swift */,
+				19CF71E82140A285004CA108 /* StudentsTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				19CF71E721401145004CA108 /* ParseConvenience.swift in Sources */,
 				197BC0FC213429A000FC517B /* StudentLocations.swift in Sources */,
 				19C90FB6213080BB00607499 /* ParseClient.swift in Sources */,
+				19CF71E92140A285004CA108 /* StudentsTableViewController.swift in Sources */,
 				191B3149212AF4D9009EA15D /* MapViewController.swift in Sources */,
 				197AC5912115E90700B0EBD4 /* UdacityClient.swift in Sources */,
 				197AC5932115E93200B0EBD4 /* UdacityConstants.swift in Sources */,

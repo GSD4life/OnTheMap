@@ -44,16 +44,16 @@ override func viewDidLoad() {
                         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
                         
                         //let first = students["firstName"] as! String
-                        let first = students.firstName
-                        let last = students.lastName
-                        let mediaURL = students.mediaURL
+                        guard let first = students.firstName else {return}
+                        guard let last = students.lastName else {return}
+                        guard let mediaURL = students.mediaURL else {return}
                         
                         // Here we create the annotation and set its coordiate, title, and subtitle properties
                         let annotation = MKPointAnnotation()
                         annotation.coordinate = coordinate
-                        annotation.title = "\(String(describing: first)) \(String(describing: last))"
+                        annotation.title = "\(first) \(last)"
                         annotation.subtitle = mediaURL
-                        print(annotation.title)
+                        print(String(describing:annotation.title))
                         // Finally we place the annotation in an array of annotations.
                         annotations.append(annotation)
                     }
@@ -64,6 +64,8 @@ override func viewDidLoad() {
     } 
  
 }
+
+
 
 // Mark: - MKMapViewDelegate
 

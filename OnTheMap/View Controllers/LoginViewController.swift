@@ -102,9 +102,11 @@ extension LoginViewController {
             if error != nil {
                 print(error ?? "empty error")
             } else {
-             self.completeLogin(data)
+                if let data = data {
+                 self.completeLogin(data)
+                }
             }
-    }
+        }
  }
 
 }
