@@ -67,7 +67,6 @@ override func viewDidLoad() {
 }
 
 
-
 // Mark: - MKMapViewDelegate
 
 // Here we create a view with a "right callout accessory view". You might choose to look into other

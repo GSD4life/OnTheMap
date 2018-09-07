@@ -23,23 +23,36 @@ var refresh = UIButton()
         navigationItem.title = "On The Map"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "logout", style: .plain, target: self, action: #selector(logout))
         
-        
         let refreshButton = UIButton(type: .system)
         refreshButton.setImage(#imageLiteral(resourceName: "icon_refresh"), for: .normal)
-        
+        refreshButton.addTarget(self, action: #selector(ManagerTabBarController.refreshViewControllers), for: .touchUpInside)
         
         let plusSignbutton = UIButton(type: .system)
         plusSignbutton.setImage(#imageLiteral(resourceName: "icon_addpin"), for: .normal)
         
-        
         navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: plusSignbutton), UIBarButtonItem(customView: refreshButton)]
 
-        
     }
+    
+   @objc func refreshViewControllers() {
+        
+        if (self.selectedViewController?.isKind(of: MapViewController.self))! {
+             let controller = self.selectedViewController as! MapViewController
+            controller.getMapInfo()
+        } else if (self.selectedViewController?.isKind(of: StudentsTableViewController.self))! {
+            let controller = self.selectedViewController as! StudentsTableViewController
+            controller.getTableInfo()
+        } else {
+            print("trying to refresh a view")
+        }
+    }
+    
     
     @objc func cancel(sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
     
     
     

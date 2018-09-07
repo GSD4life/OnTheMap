@@ -21,19 +21,21 @@ class StudentsTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        getTableInfo()
+    }
+    
+    func getTableInfo() {
         ParseClient.sharedInstance().getStudentsLocation{ (studentData, error) in
             if let studentData = studentData {
                 self.studentData = studentData
-                    performUIUpdatesOnMain {
-                        self.mapsTableView.reloadData()
-                    }
-                } else {
-                    print(error ?? "empty error")
+                performUIUpdatesOnMain {
+                    self.mapsTableView.reloadData()
                 }
+            } else {
+                print(error ?? "empty error")
             }
         }
-    
-    
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -41,9 +43,7 @@ class StudentsTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
-
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return studentData.count
