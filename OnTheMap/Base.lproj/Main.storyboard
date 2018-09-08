@@ -37,7 +37,7 @@
                                 <rect key="frame" x="65" y="254" width="219" height="30"/>
                                 <state key="normal" title="Don't have an account? Sign Up"/>
                                 <connections>
-                                    <action selector="signUPButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="clA-aD-JA4"/>
+                                    <action selector="signUpButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jWe-To-xtd"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KV1-4s-9Z8">
@@ -98,7 +98,7 @@
                         <outlet property="logInButton" destination="KV1-4s-9Z8" id="fpB-9F-Vc1"/>
                         <outlet property="loginToUdacityLabel" destination="1aQ-cZ-2uE" id="B2l-h2-mqX"/>
                         <outlet property="passwordTextField" destination="Gab-gv-uTz" id="Osi-RB-s4R"/>
-                        <outlet property="signUpButton" destination="rPh-c8-yNb" id="7L3-8S-Uqs"/>
+                        <outlet property="signUpButton" destination="rPh-c8-yNb" id="bhI-77-hxd"/>
                         <outlet property="udacityImageView" destination="ddx-MP-kxo" id="77V-QP-Q86"/>
                     </connections>
                 </viewController>
