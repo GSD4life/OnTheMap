@@ -28,7 +28,7 @@ override func viewDidLoad() {
 
     func getMapInfo() {
         
-        ParseClient.sharedInstance().getStudentsLocation { (uniqueData, error) in
+        ParseClient.sharedInstance().getStudentsLocation() { (uniqueData, error) in
             if let uniqueData = uniqueData {
                 self.uniqueData = uniqueData
                 
@@ -48,7 +48,7 @@ override func viewDidLoad() {
                         guard let last = students.lastName else {return}
                         guard let mediaURL = students.mediaURL else {return}
                         
-                        // Here we create the annotation and set its coordiate, title, and subtitle properties
+                        // Here we create the annotation and set its coordinate, title, and subtitle properties
                         let annotation = MKPointAnnotation()
                         annotation.coordinate = coordinate
                         annotation.title = "\(first) \(last)"

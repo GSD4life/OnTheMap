@@ -56,17 +56,16 @@ class ParseClient: NSObject {
     }
     
     
- /*   func taskForStudent(uniqueKey: String,  completionHandlerToGetLocation: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    func taskForStudent(parameters: [String:AnyObject],  completionHandlerToGetLocation: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
-        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation?where={\(uniqueKey):1234}"
+        var parameterswithKey = parameters
         
+        let request = NSMutableURLRequest(url: URLFromParameters(parameterswithKey))
         
-        let url = URL(string: urlString)
-        var request = URLRequest(url: url!)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
+        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             
             func sendError(_ error: String) {
                 print(error)
@@ -104,7 +103,7 @@ class ParseClient: NSObject {
         return task
     
     
-    } */
+    }
     
    
     
@@ -134,6 +133,27 @@ class func sharedInstance() -> ParseClient {
     }
     return Singleton.sharedInstance
 }
+    
+    private func URLFromParameters(_ parameters: [String:AnyObject]) -> URL {
+        
+        var components = URLComponents()
+        components.scheme = ParseClient.Constants.scheme
+        components.host = ParseClient.Constants.host
+        components.path = ParseClient.Constants.path
+        components.queryItems = [URLQueryItem]()
+        
+        
+        for (key, value) in parameters {
+            let queryItem = URLQueryItem(name: key, value: "\(value)")
+            components.queryItems!.append(queryItem)
+        }
+        
+        return components.url!
+    }
+    
+    
+    
+    
     
 
     

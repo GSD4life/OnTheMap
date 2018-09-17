@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		191B3149212AF4D9009EA15D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191B3148212AF4D9009EA15D /* MapViewController.swift */; };
+		1930B613214D5F5D00F59171 /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1930B612214D5F5D00F59171 /* InformationPostingViewController.swift */; };
 		197AC5912115E90700B0EBD4 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197AC5902115E90700B0EBD4 /* UdacityClient.swift */; };
 		197AC5932115E93200B0EBD4 /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197AC5922115E93200B0EBD4 /* UdacityConstants.swift */; };
 		197BC0FC213429A000FC517B /* StudentLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197BC0FB213429A000FC517B /* StudentLocations.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		191B3148212AF4D9009EA15D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		1930B612214D5F5D00F59171 /* InformationPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
 		197AC5902115E90700B0EBD4 /* UdacityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		197AC5922115E93200B0EBD4 /* UdacityConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
 		197BC0FB213429A000FC517B /* StudentLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocations.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				191B3148212AF4D9009EA15D /* MapViewController.swift */,
 				19E3E6F6212C58B200308D54 /* ManagerTabBarController.swift */,
 				19CF71E82140A285004CA108 /* StudentsTableViewController.swift */,
+				1930B612214D5F5D00F59171 /* InformationPostingViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				197BC0FC213429A000FC517B /* StudentLocations.swift in Sources */,
 				19C90FB6213080BB00607499 /* ParseClient.swift in Sources */,
 				19CF71E92140A285004CA108 /* StudentsTableViewController.swift in Sources */,
+				1930B613214D5F5D00F59171 /* InformationPostingViewController.swift in Sources */,
 				191B3149212AF4D9009EA15D /* MapViewController.swift in Sources */,
 				197AC5912115E90700B0EBD4 /* UdacityClient.swift in Sources */,
 				197AC5932115E93200B0EBD4 /* UdacityConstants.swift in Sources */,

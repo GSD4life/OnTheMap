@@ -28,6 +28,23 @@ struct StudentInfoKeys {
 struct UsersLocation {
    static let studentsLocationResults = "results"
 }
+    
+struct Constants {
+    
+    static let queryName = "where"
+    
+    
+    static let scheme = "https"
+    static let host = "parse.udacity.com"
+    static let path = "/parse/classes/StudentLocation"
+    static let UniqueKeyValue = "11138462743"
+    static let queryValues = "{\"uniqueKey\": \"11138462743\"}"
+   
+    
+    
+    }
+    
+    
 
 }
 
