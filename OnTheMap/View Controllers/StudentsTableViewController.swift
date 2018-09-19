@@ -59,7 +59,7 @@ class StudentsTableViewController: UITableViewController {
         cell.imageView?.image = #imageLiteral(resourceName: "icon_pin")
         cell.textLabel?.text = "\(firstName) \(lastName)"
         cell.detailTextLabel?.text = mediaURL
-        cell.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        cell.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
         
        return cell
     }

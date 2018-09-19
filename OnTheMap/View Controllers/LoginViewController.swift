@@ -38,10 +38,10 @@ class LoginViewController: UIViewController {
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         
-        subscribeToNotification(.UIKeyboardWillShow, selector: #selector(keyboardWillShow))
-        subscribeToNotification(.UIKeyboardWillHide, selector: #selector(keyboardWillHide))
-        subscribeToNotification(.UIKeyboardDidShow, selector: #selector(keyboardDidShow))
-        subscribeToNotification(.UIKeyboardDidHide, selector: #selector(keyboardDidHide))
+        subscribeToNotification(UIResponder.keyboardWillShowNotification, selector: #selector(keyboardWillShow))
+        subscribeToNotification(UIResponder.keyboardWillHideNotification, selector: #selector(keyboardWillHide))
+        subscribeToNotification(UIResponder.keyboardDidShowNotification, selector: #selector(keyboardDidShow))
+        subscribeToNotification(UIResponder.keyboardDidHideNotification, selector: #selector(keyboardDidHide))
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -152,7 +152,7 @@ extension LoginViewController: UITextFieldDelegate {
     
     private func keyboardHeight(_ notification: Notification) -> CGFloat {
         let userInfo = (notification as NSNotification).userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.cgRectValue.height
     }
     
