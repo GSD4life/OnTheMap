@@ -255,10 +255,10 @@
             </objects>
             <point key="canvasLocation" x="2919.375" y="223.94366197183098"/>
         </scene>
-        <!--Map-->
+        <!--MapViewController-->
         <scene sceneID="tGT-an-dGP">
             <objects>
-                <viewController id="1Md-wt-9Be" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Md-wt-9Be" userLabel="MapViewController" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VIR-66-ULC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -271,6 +271,9 @@
                             </navigationBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7pO-RH-9UR">
                                 <rect key="frame" x="0.0" y="108" width="320" height="411"/>
+                                <connections>
+                                    <outlet property="delegate" destination="1Md-wt-9Be" id="lof-S9-rSZ"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

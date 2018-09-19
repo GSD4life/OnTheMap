@@ -10,10 +10,11 @@ import UIKit
 
 extension UdacityClient {
 
-struct Constants {
-    static let username = "username"
-    static let password = "password"
- }
-
+struct UdacityUser {
+   var uniqueKey: String?
+   var firstName: String?
+   var lastName: String?
+    
 }
 
+}

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MapViewController.swift
 //  OnTheMap
 //
 //  Created by Shane Sealy on 8/20/18.
@@ -66,7 +66,6 @@ override func viewDidLoad() {
  
 }
 
-
 // Mark: - MKMapViewDelegate
 
 // Here we create a view with a "right callout accessory view". You might choose to look into other
@@ -84,6 +83,7 @@ func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnota
         pinView!.canShowCallout = true
         pinView!.pinTintColor = .red
         pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+    
     }
     else {
         pinView!.annotation = annotation
@@ -102,5 +102,6 @@ func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, callou
         }
     }
 }
+
 
 
