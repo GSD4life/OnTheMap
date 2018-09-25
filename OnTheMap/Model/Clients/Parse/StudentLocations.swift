@@ -31,17 +31,17 @@ struct StudentInformation {
 // Construct a StudentInformation dictionary
 
 init(dictionary: [String:AnyObject?]) {
-    objectId = dictionary[ParseClient.StudentInfoKeys.objectId] as? String ?? ""
-    uniqueKey = dictionary[ParseClient.StudentInfoKeys.uniqueKey] as? String ?? ""
-    firstName = dictionary[ParseClient.StudentInfoKeys.firstName] as? String ?? ""
-    lastName = dictionary[ParseClient.StudentInfoKeys.lastName] as? String ?? ""
-    mapString = dictionary[ParseClient.StudentInfoKeys.mapString] as? String ?? ""
-    mediaURL = dictionary[ParseClient.StudentInfoKeys.mediaURL] as? String ?? ""
-    latitude = dictionary[ParseClient.StudentInfoKeys.latitude] as? Double ?? 0.0
-    longitude = dictionary[ParseClient.StudentInfoKeys.longitude] as? Double ?? 0.0
-    createdAt = dictionary[ParseClient.StudentInfoKeys.createdAt] as? String ?? ""
-    updatedAt = dictionary[ParseClient.StudentInfoKeys.updatedAt] as? String ?? ""
-    ACL = dictionary[ParseClient.StudentInfoKeys.ACL] as? String ?? ""
+    objectId = dictionary[ParseClient.JSONResponseKeys.objectId] as? String ?? ""
+    uniqueKey = dictionary[ParseClient.JSONResponseKeys.uniqueKey] as? String ?? ""
+    firstName = dictionary[ParseClient.JSONResponseKeys.firstName] as? String ?? ""
+    lastName = dictionary[ParseClient.JSONResponseKeys.lastName] as? String ?? ""
+    mapString = dictionary[ParseClient.JSONResponseKeys.mapString] as? String ?? ""
+    mediaURL = dictionary[ParseClient.JSONResponseKeys.mediaURL] as? String ?? ""
+    latitude = dictionary[ParseClient.JSONResponseKeys.latitude] as? Double ?? 0.0
+    longitude = dictionary[ParseClient.JSONResponseKeys.longitude] as? Double ?? 0.0
+    createdAt = dictionary[ParseClient.JSONResponseKeys.createdAt] as? String ?? ""
+    updatedAt = dictionary[ParseClient.JSONResponseKeys.updatedAt] as? String ?? ""
+    ACL = dictionary[ParseClient.JSONResponseKeys.ACL] as? String ?? ""
     
   }
     

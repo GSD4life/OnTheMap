@@ -11,7 +11,7 @@ import MapKit
 extension ParseClient {
 
 
-struct StudentInfoKeys {
+struct JSONResponseKeys {
     static let objectId = "objectId"
     static let uniqueKey = "uniqueKey"
     static let firstName = "firstName"
@@ -24,10 +24,23 @@ struct StudentInfoKeys {
     static let updatedAt = "updatedAt"
     static let ACL = "ACL"
 }
+    
 
 struct UsersLocation {
    static let studentsLocationResults = "results"
 }
+    
+    struct JSONBodyKeys {
+        static let objectId = JSONResponseKeys.objectId
+        static let uniqueKey = Constants.UniqueKeyValue
+        static let firstName = JSONResponseKeys.firstName
+        static let lastName = JSONResponseKeys.lastName
+        static let mapString = JSONResponseKeys.mapString
+        static let mediaURL = JSONResponseKeys.mediaURL
+        static let latitude = JSONResponseKeys.latitude
+        static let longitude = JSONResponseKeys.longitude
+        
+    }
     
 struct Constants {
     
@@ -39,6 +52,7 @@ struct Constants {
     static let path = "/parse/classes/StudentLocation"
     static let UniqueKeyValue = "1234"
     static let queryValues = "{\"uniqueKey\": \"1234\"}"
+
    
     
     

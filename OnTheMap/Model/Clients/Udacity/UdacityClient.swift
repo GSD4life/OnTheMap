@@ -26,7 +26,7 @@ class UdacityClient: NSObject {
         
         /* 4. Make the request */
         let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+        let task = session.dataTask(with: request) { (data, response, error) in
             
             func sendError(_ error: String) {
                 print(error)

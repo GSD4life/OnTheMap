@@ -72,7 +72,6 @@ class StudentsTableViewController: UITableViewController {
         let app = UIApplication.shared
         app.openURL(URL(string: webAddress)!)
         
-
     }
     
     
