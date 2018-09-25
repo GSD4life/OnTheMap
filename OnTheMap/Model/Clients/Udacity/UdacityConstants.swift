@@ -17,4 +17,9 @@ struct UdacityUser {
     
 }
 
+struct JSONUserKey {
+    static let user = "user"
+
+}
+
 }

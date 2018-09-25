@@ -101,7 +101,20 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController {
     
-    func getUserInfo() {
+    func getUserInfo(){
+        UdacityClient.sharedInstance().getPublicUserData { (data, error) in
+            if error != nil {
+                print(error ?? "empty error")
+            } else {
+                if let data = data {
+                    self.completeLogin(data)
+                }
+            }
+      }
+    }
+}
+    
+  /*  func getUserInfo() {
         UdacityClient.sharedInstance().getUserData { (data, error) in
             if error != nil {
                 print(error ?? "empty error")
@@ -113,7 +126,7 @@ extension LoginViewController {
         }
  }
 
-}
+}*/
 
     // Mark: - LoginViewController: UITextFieldDelegate
 

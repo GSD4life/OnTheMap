@@ -59,7 +59,7 @@ extension ParseClient {
     
     
     
-    func postingStudentLocation( completionHandlerForPostingLocation: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
+    func postingStudentLocation(_ completionHandlerForPostingLocation: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
         
         
         let jsonbody = "{\"uniqueKey\": \"\(ParseClient.Constants.UniqueKeyValue)\", \"firstName\": \"\(ParseClient.JSONBodyKeys.firstName)\", \"lastName\": \"\(ParseClient.JSONBodyKeys.lastName)\",\"mapString\": \"\(ParseClient.JSONBodyKeys.mapString)\", \"mediaURL\": \"\(ParseClient.JSONBodyKeys.mediaURL)\",\"latitude\": \"\(ParseClient.JSONBodyKeys.latitude)\", \"longitude\": \"\(ParseClient.JSONBodyKeys.longitude)\"}"
@@ -71,6 +71,7 @@ extension ParseClient {
                 completionHandlerForPostingLocation(nil, error)
             } else {
                 if let results = results?[ParseClient.JSONResponseKeys.objectId] as? String {
+                    
                     completionHandlerForPostingLocation(results, nil)
                 } else {
                     completionHandlerForPostingLocation(nil, NSError(domain: "postingStudentLocation", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse postingStudentLocation"]))
