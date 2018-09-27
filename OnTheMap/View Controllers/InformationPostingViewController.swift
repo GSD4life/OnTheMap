@@ -10,6 +10,8 @@ import UIKit
 
 class InformationPostingViewController: UIViewController {
     
+    var uniqueData: [StudentInformation] = [StudentInformation]()
+    
     
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var URLTextField: UITextField!
@@ -34,7 +36,7 @@ class InformationPostingViewController: UIViewController {
     
     func navigationButtons () {
         navigationItem.title = "Add Location"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(ninpo))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(test))
         
     }
     
@@ -50,7 +52,9 @@ class InformationPostingViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    @objc func ninpo() {
-     print("Hello")
-    }
+    @objc func test() {
+        
+            }
+        
+    
 }
