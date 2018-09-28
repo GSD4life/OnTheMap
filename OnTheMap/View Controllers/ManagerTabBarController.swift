@@ -29,6 +29,7 @@ var refresh = UIButton()
         
         let plusSignbutton = UIButton(type: .system)
         plusSignbutton.setImage(#imageLiteral(resourceName: "icon_addpin"), for: .normal)
+        plusSignbutton.addTarget(self, action: #selector(moveToInformationPostingView), for: .touchUpInside)
         
         navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: plusSignbutton), UIBarButtonItem(customView: refreshButton)]
 
@@ -36,7 +37,7 @@ var refresh = UIButton()
     
    @objc func refreshViewControllers() {
         
-        if (self.selectedViewController?.isKind(of: MapViewController.self))! {
+    if (self.selectedViewController?.isKind(of: MapViewController.self))! {
              let controller = self.selectedViewController as! MapViewController
             controller.getMapInfo()
         } else if (self.selectedViewController?.isKind(of: StudentsTableViewController.self))! {
@@ -45,6 +46,11 @@ var refresh = UIButton()
         } else {
             print("trying to refresh a view")
         }
+    }
+    
+    @objc func moveToInformationPostingView() {
+        let InfoPostingVC = self.storyboard?.instantiateViewController(withIdentifier: "InformationPostingViewController") as! InformationPostingViewController
+        navigationController?.pushViewController(InfoPostingVC, animated: true)
     }
     
     
@@ -77,10 +83,6 @@ var refresh = UIButton()
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
 
 }

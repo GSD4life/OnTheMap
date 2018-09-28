@@ -10,16 +10,13 @@ import UIKit
 
 class InformationPostingViewController: UIViewController {
     
-    var uniqueData: [StudentInformation] = [StudentInformation]()
+    var studentData: [StudentInformation] = [StudentInformation]()
     
     
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var URLTextField: UITextField!
     
     @IBOutlet weak var worldIconImageView: UIImageView!
-    
-    
-    
     
 
     override func viewDidLoad() {
@@ -36,25 +33,28 @@ class InformationPostingViewController: UIViewController {
     
     func navigationButtons () {
         navigationItem.title = "Add Location"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(test))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(cancel))
         
     }
     
     @IBAction func findLocation(_ sender: Any) {
+        ParseClient.sharedInstance().getLocationForOneStudent { (studentData, error) in
+            if let studentData = studentData {
+                self.studentData = studentData
+                performUIUpdatesOnMain {
+                  // ParseClient.mapsTableView.reloadData()
+                }
+            } else {
+                print(error ?? "empty error")
+            }
+        }
     
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    
+    @objc func cancel() {
+        self.navigationController?.popToRootViewController(animated: true)
     }
-    */
-    @objc func test() {
-        
-            }
         
     
 }
