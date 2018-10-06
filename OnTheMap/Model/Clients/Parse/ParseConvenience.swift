@@ -32,11 +32,9 @@ extension ParseClient {
     }
 
     
-     //Testing function below for getting location info for one student
-    
      func getLocationForOneStudent(_ completionHandlerForOneStudent: @escaping (_ result: [StudentInformation]?, _ error: NSError?) -> Void) {
         
-        let parameters = [Constants.queryName:Constants.queryValues]
+        let parameters = [Constants.queryName:Constants.queryValues, Constants.queryLimit: Constants.value, Constants.order:Constants.updatedAt]
         
         let _ = taskForStudent(parameters: parameters as [String:AnyObject], completionHandlerToGetLocation:  { (results, error) in
     
@@ -57,21 +55,16 @@ extension ParseClient {
         }
     )}
     
-    
-    
+
     func postingStudentLocation(_ completionHandlerForPostingLocation: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
         
-        
-        let jsonbody = "{\"uniqueKey\": \"\(ParseClient.Constants.UniqueKeyValue)\", \"firstName\": \"\(ParseClient.JSONBodyKeys.firstName)\", \"lastName\": \"\(ParseClient.JSONBodyKeys.lastName)\",\"mapString\": \"\(ParseClient.JSONBodyKeys.mapString)\", \"mediaURL\": \"\(ParseClient.JSONBodyKeys.mediaURL)\",\"latitude\": \"\(ParseClient.JSONBodyKeys.latitude)\", \"longitude\": \"\(ParseClient.JSONBodyKeys.longitude)\"}"
-        
-        let _ = taskForPost(jsonBody: jsonbody) { (results, error) in
+        let _ = taskForPost { (results, error) in
             
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
                 completionHandlerForPostingLocation(nil, error)
             } else {
                 if let results = results?[ParseClient.JSONResponseKeys.objectId] as? String {
-                    
                     completionHandlerForPostingLocation(results, nil)
                 } else {
                     completionHandlerForPostingLocation(nil, NSError(domain: "postingStudentLocation", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse postingStudentLocation"]))

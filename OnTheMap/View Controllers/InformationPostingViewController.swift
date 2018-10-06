@@ -38,6 +38,22 @@ class InformationPostingViewController: UIViewController {
     }
     
     @IBAction func findLocation(_ sender: Any) {
+        
+        }
+    
+    func postingALocation() {
+        ParseClient.sharedInstance().postingStudentLocation { (data, error) in
+            if error != nil {
+                print(error ?? "empty error")
+            } else {
+                if let data = data {
+                    print(data)
+                }
+            }
+        }
+    }
+    
+    func singleStudentLocation() {
         ParseClient.sharedInstance().getLocationForOneStudent { (studentData, error) in
             if let studentData = studentData {
                 self.studentData = studentData
@@ -48,10 +64,9 @@ class InformationPostingViewController: UIViewController {
                 print(error ?? "empty error")
             }
         }
-    
     }
     
-    
+
     @objc func cancel() {
         self.navigationController?.popToRootViewController(animated: true)
     }

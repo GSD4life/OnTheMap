@@ -59,6 +59,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19598940215E74C9000C42CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		197AC58D2115E72800B0EBD4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +121,7 @@
 			children = (
 				19ED262820FE83B6009B05DD /* OnTheMap */,
 				19ED262720FE83B6009B05DD /* Products */,
+				19598940215E74C9000C42CC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,6 +181,11 @@
 					19ED262520FE83B6009B05DD = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};

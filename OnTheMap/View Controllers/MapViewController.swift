@@ -58,7 +58,9 @@ override func viewDidLoad() {
                         annotations.append(annotation)
                     
                     }
+                    // When the array is complete, we add the annotations to the map.
                     self.mapView.addAnnotations(annotations)
+                    
                 }
             }
         }
@@ -76,7 +78,7 @@ func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnota
     
     let reuseId = "pin"
     
-    var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+     var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
     
     if pinView == nil {
         pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
@@ -92,6 +94,8 @@ func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnota
     return pinView
 }
 
+
+
 // This delegate method is implemented to respond to taps. It opens the system browser
 // to the URL specified in the annotationViews subtitle property.
 func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
@@ -99,6 +103,7 @@ func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, callou
         let app = UIApplication.shared
         if let toOpen = view.annotation?.subtitle! {
             app.openURL(URL(string: toOpen)!)
+            
         }
     }
 }

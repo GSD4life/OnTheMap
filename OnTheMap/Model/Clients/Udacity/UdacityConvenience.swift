@@ -10,9 +10,6 @@ import UIKit
 
 extension UdacityClient {
     
-    
-    
-    
     func getPublicUserData(_ completionHandlerForUserData: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
        // var student = UdacityUser()
     

@@ -37,26 +37,23 @@ struct UsersLocation {
         static let lastName = JSONResponseKeys.lastName
         static let mapString = JSONResponseKeys.mapString
         static let mediaURL = JSONResponseKeys.mediaURL
-        static let latitude = JSONResponseKeys.latitude
-        static let longitude = JSONResponseKeys.longitude
-        
+        static let latitude: Double = 0.00
+        static let longitude: Double = 0.00
     }
     
 struct Constants {
     
     static let queryName = "where"
-    
-    
+    static let queryLimit = "limit"
+    static let value = "1"
+    static let order = "order"
+    static let updatedAt = "-updatedAt"
     static let scheme = "https"
     static let host = "parse.udacity.com"
     static let path = "/parse/classes/StudentLocation"
     static let UniqueKeyValue = "1234"
     static let queryValues = "{\"uniqueKey\": \"1234\"}"
-
-   
-    
-    
-    }
+}
     
     
 

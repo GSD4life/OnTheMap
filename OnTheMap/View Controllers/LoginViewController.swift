@@ -113,20 +113,7 @@ extension LoginViewController {
       }
     }
 }
-    
-  /*  func getUserInfo() {
-        UdacityClient.sharedInstance().getUserData { (data, error) in
-            if error != nil {
-                print(error ?? "empty error")
-            } else {
-                if let data = data {
-                 self.completeLogin(data)
-                }
-            }
-        }
- }
 
-}*/
 
     // Mark: - LoginViewController: UITextFieldDelegate
 

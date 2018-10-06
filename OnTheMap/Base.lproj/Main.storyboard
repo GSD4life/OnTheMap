@@ -274,9 +274,6 @@
                             </navigationBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7pO-RH-9UR">
                                 <rect key="frame" x="0.0" y="108" width="320" height="411"/>
-                                <connections>
-                                    <outlet property="delegate" destination="1Md-wt-9Be" id="lof-S9-rSZ"/>
-                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -293,7 +290,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-deselected" id="QjD-qU-uTa"/>
                     <connections>
-                        <outlet property="mapView" destination="7pO-RH-9UR" id="jil-1S-2gy"/>
+                        <outlet property="mapView" destination="7pO-RH-9UR" id="V0J-68-OAs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Khk-RC-OUd" userLabel="First Responder" sceneMemberID="firstResponder"/>
