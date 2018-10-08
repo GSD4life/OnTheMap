@@ -18,13 +18,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     var uniqueData: [StudentInformation] = [StudentInformation]()
     
+    
         
 override func viewDidLoad() {
     super.viewDidLoad()
     self.mapView.delegate = self
-    getMapInfo()
+}
     
-    }
+override func viewWillAppear(_ animated: Bool) {
+    getMapInfo()
+}
 
     func getMapInfo() {
         
@@ -53,6 +56,7 @@ override func viewDidLoad() {
                         annotation.coordinate = coordinate
                         annotation.title = "\(first) \(last)"
                         annotation.subtitle = mediaURL
+    
                         print(String(describing:annotation.title))
                         // Finally we place the annotation in an array of annotations.
                         annotations.append(annotation)
@@ -68,6 +72,8 @@ override func viewDidLoad() {
  
 }
 
+
+extension MapViewController {
 // Mark: - MKMapViewDelegate
 
 // Here we create a view with a "right callout accessory view". You might choose to look into other
@@ -95,10 +101,11 @@ func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnota
 }
 
 
-
 // This delegate method is implemented to respond to taps. It opens the system browser
 // to the URL specified in the annotationViews subtitle property.
 func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    
+    
     if control == view.rightCalloutAccessoryView {
         let app = UIApplication.shared
         if let toOpen = view.annotation?.subtitle! {
@@ -108,5 +115,5 @@ func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, callou
     }
 }
 
-
+}
 
