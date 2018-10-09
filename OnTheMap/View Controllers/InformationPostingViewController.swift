@@ -12,7 +12,6 @@ class InformationPostingViewController: UIViewController {
     
     var studentData: [StudentInformation] = [StudentInformation]()
     
-    
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var URLTextField: UITextField!
     
