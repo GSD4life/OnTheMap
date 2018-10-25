@@ -27,11 +27,11 @@ var refresh = UIButton()
         refreshButton.setImage(#imageLiteral(resourceName: "icon_refresh"), for: .normal)
         refreshButton.addTarget(self, action: #selector(ManagerTabBarController.refreshViewControllers), for: .touchUpInside)
         
-        let plusSignbutton = UIButton(type: .system)
-        plusSignbutton.setImage(#imageLiteral(resourceName: "icon_addpin"), for: .normal)
-        plusSignbutton.addTarget(self, action: #selector(moveToInformationPostingView), for: .touchUpInside)
+        let plusSignButton = UIButton(type: .system)
+        plusSignButton.setImage(#imageLiteral(resourceName: "icon_addpin"), for: .normal)
+        plusSignButton.addTarget(self, action: #selector(moveToInformationPostingView), for: .touchUpInside)
         
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: plusSignbutton), UIBarButtonItem(customView: refreshButton)]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: plusSignButton), UIBarButtonItem(customView: refreshButton)]
 
     }
     

@@ -45,6 +45,14 @@ extension ParseClient {
                 
                  if let results = results?[ParseClient.UsersLocation.studentsLocationResults] as? [[String:AnyObject]] {
                     
+                    /*Code below gets the object id out of the array of dicitionaries titled results
+                    for (_, studentDictionary) in results.enumerated() {
+                        guard let individualObjectId = studentDictionary["objectId"] as? String else {return}
+                        let studentObjectId = individualObjectId
+                        print(studentObjectId)
+                        
+                    }*/
+                    
                    let result = StudentInformation.userDataFromResults(results)
                     completionHandlerForOneStudent(result, nil)
                     
@@ -64,7 +72,8 @@ extension ParseClient {
             if let error = error {
                 completionHandlerForPostingLocation(nil, error)
             } else {
-                if let results = results?[ParseClient.JSONResponseKeys.objectId] as? String {
+                if let results = results?[JSONResponseKeys.objectId] as? String {
+                    let studentObjectId = results
                     completionHandlerForPostingLocation(results, nil)
                 } else {
                     completionHandlerForPostingLocation(nil, NSError(domain: "postingStudentLocation", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse postingStudentLocation"]))
@@ -72,8 +81,26 @@ extension ParseClient {
             }
         }
     }
+    
+    func puttingAStudentLocation(_ completionHandlerForPuttingLocation: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
+        
+        let _ = taskForPuttingALocation { (results, error) in
+            
+            /* 3. Send the desired value(s) to completion handler */
+            if let error = error {
+                completionHandlerForPuttingLocation(nil, error)
+            } else {
+                if let results = results?[JSONResponseKeys.updatedAt] as? String {
+                    completionHandlerForPuttingLocation(results, nil)
+                } else {
+                    completionHandlerForPuttingLocation(nil, NSError(domain: "puttingStudentLocation", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse puttingStudentLocation"]))
+                }
+            }
+        }
+    }
 
 
+    
 
 
 

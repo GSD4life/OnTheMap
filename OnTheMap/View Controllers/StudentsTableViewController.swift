@@ -70,8 +70,7 @@ class StudentsTableViewController: UITableViewController {
         guard let webAddress = web.mediaURL else {return}
         
         let app = UIApplication.shared
-        app.openURL(URL(string: webAddress)!)
-        
+        app.open(URL(string: webAddress)!)
     }
     
     

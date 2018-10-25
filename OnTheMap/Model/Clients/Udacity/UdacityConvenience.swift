@@ -18,9 +18,13 @@ extension UdacityClient {
         if let error = error {
             completionHandlerForUserData(nil, error)
         } else {
-            if let results = results?[UdacityClient.JSONUserKey.user] as? [String:AnyObject] {
-
-             completionHandlerForUserData(results, nil)
+            if let getUsersInfo = results?[JSONUserKey.user] as? [String:AnyObject] {
+                guard let firstName = getUsersInfo["first_name"] as? String else {return}
+                print(firstName)
+                guard let lastName = getUsersInfo["last_name"] as? String else {return}
+                print(lastName)
+                
+             completionHandlerForUserData(getUsersInfo, nil)
             
             } else {
        completionHandlerForUserData(nil, NSError(domain: "getPublicUserData parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse get Pulic User  location data"]))

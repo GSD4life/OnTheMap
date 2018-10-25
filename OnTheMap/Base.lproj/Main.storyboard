@@ -208,7 +208,7 @@
                                 <rect key="frame" x="40" y="190" width="250" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="address-level1+2"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="location"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Website" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bo3-yM-9oh">
                                 <rect key="frame" x="40" y="246" width="250" height="30"/>
@@ -250,6 +250,7 @@
                     </view>
                     <connections>
                         <outlet property="URLTextField" destination="bo3-yM-9oh" id="KrA-R9-vti"/>
+                        <outlet property="findLocationButton" destination="3Ke-qR-8wa" id="3Cx-cs-OPT"/>
                         <outlet property="locationTextField" destination="BWN-px-YA3" id="Rph-6d-xfq"/>
                         <outlet property="worldIconImageView" destination="IWu-6k-2bp" id="p3P-2Q-56T"/>
                     </connections>
@@ -257,6 +258,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ssc-4A-N97" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2919.375" y="223.94366197183098"/>
+        </scene>
+        <!--Add Location View Controller-->
+        <scene sceneID="C3I-2b-T2O">
+            <objects>
+                <viewController storyboardIdentifier="AddLocationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8QB-Lo-X7V" customClass="AddLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="869-Eo-XuZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fGb-5l-sRA">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDb-nI-JNP">
+                                <rect key="frame" x="0.0" y="478" width="320" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Finish">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="finishButton:" destination="8QB-Lo-X7V" eventType="touchUpInside" id="NxR-lz-jty"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="SDb-nI-JNP" firstAttribute="leading" secondItem="fGb-5l-sRA" secondAttribute="leading" id="2XT-Sl-HkG"/>
+                            <constraint firstItem="fGb-5l-sRA" firstAttribute="leading" secondItem="vJ5-3U-jjy" secondAttribute="leading" id="FL0-jE-LxH"/>
+                            <constraint firstItem="vJ5-3U-jjy" firstAttribute="bottom" secondItem="fGb-5l-sRA" secondAttribute="bottom" id="ORJ-cg-4FK"/>
+                            <constraint firstItem="SDb-nI-JNP" firstAttribute="trailing" secondItem="fGb-5l-sRA" secondAttribute="trailing" id="QF2-DL-f2o"/>
+                            <constraint firstItem="fGb-5l-sRA" firstAttribute="top" secondItem="vJ5-3U-jjy" secondAttribute="top" id="Xpd-4i-lkJ"/>
+                            <constraint firstItem="vJ5-3U-jjy" firstAttribute="trailing" secondItem="fGb-5l-sRA" secondAttribute="trailing" id="g02-hh-sSD"/>
+                            <constraint firstItem="SDb-nI-JNP" firstAttribute="top" secondItem="vJ5-3U-jjy" secondAttribute="top" constant="458" id="tn4-74-yGJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vJ5-3U-jjy"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="fGb-5l-sRA" id="u23-SE-az6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JQm-9u-3Nv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3829" y="224"/>
         </scene>
         <!--MapViewController-->
         <scene sceneID="tGT-an-dGP">

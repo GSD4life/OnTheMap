@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
 
     @IBAction func signUpButton(_ sender: Any) {
         let app = UIApplication.shared
-        app.openURL(URL(string: "https://www.udacity.com")!)
+        app.open(URL(string: "https://www.udacity.com")!)
     }
     
     // Mark: Lifecycle
@@ -78,6 +78,13 @@ class LoginViewController: UIViewController {
              UdacityClient.sharedInstance().login(email: emailTextField.text!, password: passwordTextField.text!, completionHandlerForLogin: { (data, error) in
                 self.setUIEnabled(true)
                 
+            if let data = data {
+                guard let jsonAccountKey = data["account"] as? [String:AnyObject] else {return}
+                guard let studentKey = jsonAccountKey["key"] as? String else {return}
+                print(studentKey)
+                self.getUserInfo()
+            }
+                
             if error != nil {
                 
                 let alert = UIAlertController(title: "Login Failed", message: "Do you want to try again as the e-mail or password entered is incorrect.", preferredStyle: .alert)
@@ -87,12 +94,7 @@ class LoginViewController: UIViewController {
                 
                 self.present(alert, animated: true)
                 
-            } else {
-        
-                self.getUserInfo()
-        
             }
-
         })
             
             }

@@ -24,6 +24,7 @@
 		19ED262F20FE83B6009B05DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19ED262D20FE83B6009B05DD /* Main.storyboard */; };
 		19ED263120FE83B7009B05DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19ED263020FE83B7009B05DD /* Assets.xcassets */; };
 		19ED263420FE83B7009B05DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19ED263220FE83B7009B05DD /* LaunchScreen.storyboard */; };
+		19FB0FA9216CF53400E5152A /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB0FA8216CF53400E5152A /* AddLocationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		19ED263020FE83B7009B05DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19ED263320FE83B7009B05DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19ED263520FE83B7009B05DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19FB0FA8216CF53400E5152A /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				19E3E6F6212C58B200308D54 /* ManagerTabBarController.swift */,
 				19CF71E82140A285004CA108 /* StudentsTableViewController.swift */,
 				1930B612214D5F5D00F59171 /* InformationPostingViewController.swift */,
+				19FB0FA8216CF53400E5152A /* AddLocationViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				1930B613214D5F5D00F59171 /* InformationPostingViewController.swift in Sources */,
 				19CA77A7215A849000573135 /* UdacityConvenience.swift in Sources */,
 				191B3149212AF4D9009EA15D /* MapViewController.swift in Sources */,
+				19FB0FA9216CF53400E5152A /* AddLocationViewController.swift in Sources */,
 				197AC5912115E90700B0EBD4 /* UdacityClient.swift in Sources */,
 				197AC5932115E93200B0EBD4 /* UdacityConstants.swift in Sources */,
 				19E3E6F7212C58B200308D54 /* ManagerTabBarController.swift in Sources */,
