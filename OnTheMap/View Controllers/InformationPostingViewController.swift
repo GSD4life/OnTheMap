@@ -7,29 +7,58 @@
 //
 
 import UIKit
-import CoreLocation
+import MapKit
 
 
-class InformationPostingViewController: UIViewController {
+class InformationPostingViewController: UIViewController, MKMapViewDelegate {
 
     var studentData: [StudentInformation] = [StudentInformation]()
+    
     
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var URLTextField: UITextField!
     @IBOutlet weak var worldIconImageView: UIImageView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var middleView: UIView!
+    @IBOutlet weak var bottomView: UIView!
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
+    @IBOutlet weak var finishButton: UIButton!
     
     @IBOutlet weak var findLocationButton: UIButton!
     
-    lazy var geocoder = CLGeocoder()
     
+    lazy var geocoder = CLGeocoder()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.delegate = self
         navigationButtons()
-        
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+     showOrHideButtonAndMap()
+     addingViewsToLayout()
+
+    }
+    
+    func addingViewsToLayout() {
+        view.addSubview(topView)
+        view.addSubview(middleView)
+        view.addSubview(bottomView)
+    }
+    
+    func showOrHideButtonAndMap() {
+        if locationTextField.text == "" || URLTextField.text == "" {
+            mapView.isHidden = true
+            finishButton.isHidden = true
+        } else {
+          mapView.isHidden = false
+          finishButton.isHidden = false
+        }
+    }
 
     func missingInfo() {
         if locationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true || URLTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
@@ -37,62 +66,56 @@ class InformationPostingViewController: UIViewController {
         }
     }
     
-    func geocodeAddress() {
+    
+    func forwardGeocodeAddress() {
         guard let location = locationTextField.text else {return}
         let address = "\(location)"
         geocoder.geocodeAddressString(address) { (placemarks, error) in
             // Process Response
             self.processResponse(withPlacemarks: placemarks, error: error)
+            guard let placemark = placemarks else {return}
+            print(placemark)
         }
-
+           findLocationButton.isHidden = true
     }
+    
     
     func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
         // Update View
-        locationTextField.isHidden = false
-        URLTextField.isHidden = false
+        missingInfo()
         
         if let error = error {
             print("Unable to Forward Geocode Address (\(error))")
             
         } else {
             var location: CLLocation?
-            
             if let placemarks = placemarks, placemarks.count > 0 {
                 location = placemarks.first?.location
+                
+                guard let location = location else {return}
+                let lat = location.coordinate.latitude
+                let long = location.coordinate.longitude
+                //let initialLocation = CLLocation(latitude: lat, longitude: long)
+                //centerMapOnLocation(location: initialLocation)
+                var coordinate = CLLocationCoordinate2D()
+                coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = coordinate
+                annotation.title = locationTextField.text
+                annotation.subtitle = URLTextField.text
+                self.mapView.addAnnotation(annotation)
             }
             
             if let location = location {
                 let coordinate = location.coordinate
                 print("The coordinates are Lat: \(coordinate.latitude) and Long: \(coordinate.longitude)"
+                    
             )}
             
         }
     
     }
-    
-    
-    // Apple provided code to forward gecode an address into coordinates
-    func getCoordinate(addressString: String,
-                        completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void ) {
-        
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(addressString) { (placemarks, error) in
-            if error == nil {
-                if let placemark = placemarks?[0] {
-                    let location = placemark.location!
-                    
-                    completionHandler(location.coordinate, nil)
-                    return
-                }
-            }
-            
-            completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
-        }
-        
-    }
-    
-    
     
     func alertMessage() {
         let ac = UIAlertController(title: "Missing a location and/or a valid URL address", message: "Please enter a valid URL using https:// and a location", preferredStyle: .alert)
@@ -108,21 +131,22 @@ class InformationPostingViewController: UIViewController {
         
     }
     
+    func topAndMiddleViewHidden() {
+        topView.isHidden = true
+        middleView.isHidden = true
+    }
+    
+    func visibleViewsForMap() {
+    mapView.isHidden = false
+    bottomView.isHidden = true
+    }
+    
     @IBAction func findLocation(_ sender: Any) {
         
-        geocodeAddress()
-        postingALocation()
-        
-        /*getCoordinate(addressString: locationTextField.text!, completionHandler: { (location, error) in
-            if let error = error {
-                print(error)
-                self.missingInfo()
-            } else {
-               print(location)
-                }
-           
-        }*/
-      
+        forwardGeocodeAddress()
+        visibleViewsForMap()
+        finishButton.isHidden = false
+        topAndMiddleViewHidden()
     }
     
     
@@ -155,6 +179,48 @@ class InformationPostingViewController: UIViewController {
     @objc func cancel() {
         self.navigationController?.popToRootViewController(animated: true)
     }
-        
     
+
+
+    
+    // Mark: - MKMapViewDelegate
+    
+    // Here we create a view with a "right callout accessory view". You might choose to look into other
+    // decoration alternatives. Notice the similarity between this method and the cellForRowAtIndexPath
+    // method in TableViewDataSource
+
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        print("delegate one reached")
+        let reuseId = "pin"
+
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+
+
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = .red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+
+        return pinView
+    }
+    
+    
+    // This delegate method is implemented to respond to taps. It opens the system browser
+    // to the URL specified in the annotationViews subtitle property.
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        print("delegate two reached")
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.shared
+            if let toOpen = view.annotation?.subtitle! {
+                app.open(URL(string: toOpen)!)
+            }
+        }
+    }
+
 }

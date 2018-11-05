@@ -16,8 +16,7 @@ class StudentsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-       
+    
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -68,7 +67,6 @@ class StudentsTableViewController: UITableViewController {
         
         let web = self.studentData[indexPath.row]
         guard let webAddress = web.mediaURL else {return}
-        
         let app = UIApplication.shared
         app.open(URL(string: webAddress)!)
     }

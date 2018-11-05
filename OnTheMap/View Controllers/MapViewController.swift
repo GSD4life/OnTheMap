@@ -17,6 +17,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     
     var uniqueData: [StudentInformation] = [StudentInformation]()
+    
         
 override func viewDidLoad() {
     super.viewDidLoad()
@@ -66,12 +67,7 @@ override func viewWillAppear(_ animated: Bool) {
                 }
             }
         }
-    } 
- 
-}
-
-
-extension MapViewController {
+    }
 // Mark: - MKMapViewDelegate
 
 // Here we create a view with a "right callout accessory view". You might choose to look into other
