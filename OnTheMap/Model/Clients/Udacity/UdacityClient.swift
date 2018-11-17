@@ -10,15 +10,6 @@ import UIKit
 
 class UdacityClient: NSObject {
     
-  
-    
-    
-    
-//var uniqueKey = 11138462743
-    /* getPubilcUSer data not working at all with "me" and only partially working with actual key - 11138462743. It only returns the following: "user": {"bio": null, "_registered": true, "linkedin_url": null, "_image": null, "guard": {"allowed_behaviors": ["register", "view-public", "view-short"]}, "location": null, "key": "11138462743", "timezone": null, "_image_url": "//robohash.org/udacity-11138462743.png", "nickname": "Shane", "website_url": null, "occupation": null}} */
-    
-   // var debugTextLabel = UILabel()
-    
     func login(email: String, password: String, completionHandlerForLogin: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> Void {
         
         /* 1. Set the parameters */
