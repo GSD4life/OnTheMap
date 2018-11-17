@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        appDelegate = UIApplication.shared.delegate as! AppDelegate
+        //appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         
         subscribeToNotification(UIResponder.keyboardWillShowNotification, selector: #selector(keyboardWillShow))

@@ -31,6 +31,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     var regionRadius: CLLocationDistance = 1000
     
     lazy var geocoder = CLGeocoder()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,8 +104,11 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
                 guard let location = location else {return}
                 let lat = location.coordinate.latitude
                 let long = location.coordinate.longitude
+                
                 let initialLocation = CLLocation(latitude: lat, longitude: long)
+                
                 centerMapOnLocation(location: initialLocation)
+                
                 var coordinate = CLLocationCoordinate2D()
                 coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
                 
@@ -158,12 +162,12 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func postingALocation(_ sender: Any) {
-        postingALocation()
+        postingLocation()
         navigationController?.popToRootViewController(animated: true)
     }
     
     
-    func postingALocation() {
+    func postingLocation() {
         ParseClient.sharedInstance().postingStudentLocation { (data, error) in
             if error != nil {
                 print(error ?? "empty error")
@@ -175,18 +179,61 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    func singleStudentLocation() {
-        ParseClient.sharedInstance().getLocationForOneStudent { (studentData, error) in
+    
+    func singleStudentLocation () {
+        ParseClient.sharedInstance().getLocationForOneStudent {  (studentData, error) in
+        
             if let studentData = studentData {
                 self.studentData = studentData
+                
+                var annotations = [MKPointAnnotation]()
+                
                 performUIUpdatesOnMain {
-                  // ParseClient.mapsTableView.reloadData()
+                    for students in self.studentData {
+                        
+                        let lat = CLLocationDegrees(students.latitude!)
+                        let long = CLLocationDegrees(students.longitude!)
+                        
+                        // The lat and long are used to create a CLLocationCoordinates2D instance.
+                        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                        
+                        //let first = students["firstName"] as! String
+                        guard let first = students.firstName else {return}
+                        guard let last = students.lastName else {return}
+                        guard let mediaURL = students.mediaURL else {return}
+                        
+                        // Here we create the annotation and set its coordinate, title, and subtitle properties
+                        let annotation = MKPointAnnotation()
+                        annotation.coordinate = coordinate
+                        annotation.title = "\(first) \(last)"
+                        annotation.subtitle = mediaURL
+                        
+                        print(String(describing:annotation.title))
+                        // Finally we place the annotation in an array of annotations.
+                        annotations.append(annotation)
+                        
+                    }
+                    // When the array is complete, we add the annotations to the map.
+                    self.mapView.addAnnotations(annotations)
+                    
                 }
-            } else {
-                print(error ?? "empty error")
             }
         }
     }
+    
+    func puttingANewLocation() {
+        ParseClient.sharedInstance().puttingAStudentLocation { (studentData, error) in
+            if let studentData = studentData {
+                print(studentData)
+            } else {
+                if let error = error {
+                    print(error)
+            }
+        }
+    }
+  
+}
+    
     
 
     @objc func cancel() {
