@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     
     var keyboardOnScreen = false
     var appDelegate: AppDelegate!
+    var userKey = String()
     
     // Mark: Outlets
     
@@ -23,6 +24,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var debugTextLabel: UILabel!
+    
     
 
     @IBAction func signUpButton(_ sender: Any) {
@@ -75,14 +77,15 @@ class LoginViewController: UIViewController {
             debugTextLabel.text = "Username or Password Empty."
         } else {
             setUIEnabled(false)
-             UdacityClient.sharedInstance().login(email: emailTextField.text!, password: passwordTextField.text!, completionHandlerForLogin: { (data, error) in
+             UdacityClient.sharedInstance().login(email: emailTextField.text!, password: passwordTextField.text!, completionHandlerForLogin: { [unowned self] (data, error) in
                 self.setUIEnabled(true)
                 
             if let data = data {
                 guard let jsonAccountKey = data["account"] as? [String:AnyObject] else {return}
                 guard let studentKey = jsonAccountKey["key"] as? String else {return}
-                print(studentKey)
-                self.getUserInfo()
+                self.userKey = studentKey
+                print(self.userKey)
+                self.getUserInfo(studentKey: self.userKey)
             }
                 
             if error != nil {
@@ -103,8 +106,8 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController {
     
-    func getUserInfo(){
-        UdacityClient.sharedInstance().getPublicUserData { (data, error) in
+    func getUserInfo(studentKey: String){
+        UdacityClient.sharedInstance().getPublicUserData { [unowned self] (data, error) in
             if error != nil {
                 print(error ?? "empty error")
             } else {
@@ -132,7 +135,7 @@ extension LoginViewController: UITextFieldDelegate {
     
     @objc func keyboardWillShow(_ notification: Notification) {
         if !keyboardOnScreen {
-            view.frame.origin.y -= keyboardHeight(notification)
+            //view.frame.origin.y -= keyboardHeight(notification)
             udacityImageView.isHidden = true
         }
     }

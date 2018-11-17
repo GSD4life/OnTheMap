@@ -10,6 +10,13 @@ import UIKit
 
 class UdacityClient: NSObject {
     
+  
+    
+    
+    
+//var uniqueKey = 11138462743
+    /* getPubilcUSer data not working at all with "me" and only partially working with actual key - 11138462743. It only returns the following: "user": {"bio": null, "_registered": true, "linkedin_url": null, "_image": null, "guard": {"allowed_behaviors": ["register", "view-public", "view-short"]}, "location": null, "key": "11138462743", "timezone": null, "_image_url": "//robohash.org/udacity-11138462743.png", "nickname": "Shane", "website_url": null, "occupation": null}} */
+    
    // var debugTextLabel = UILabel()
     
     func login(email: String, password: String, completionHandlerForLogin: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> Void {
@@ -17,7 +24,7 @@ class UdacityClient: NSObject {
         /* 1. Set the parameters */
         
         /* 2/3. Build the URL, Configure the request */
-        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+        var request = URLRequest(url: URL(string: "https://gae.udacity.com/api/session")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -63,8 +70,6 @@ class UdacityClient: NSObject {
         task.resume()
         
     }
-    
-    
     
     func logout(completionHandlerToLogout: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> Void {
         
@@ -116,7 +121,10 @@ class UdacityClient: NSObject {
     }
     
     func getUserData(completionHandlerToGetData: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
-    let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/me")!)
+        
+        //var userID = UdacityUser.uniqueKey
+        
+    let request = URLRequest(url: URL(string: "https://gae.udacity.com/api/users/me")!)
     let session = URLSession.shared
     let task = session.dataTask(with: request) { data, response, error in
         

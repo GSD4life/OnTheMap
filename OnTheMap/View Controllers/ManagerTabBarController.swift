@@ -59,7 +59,7 @@ var refresh = UIButton()
     }
     
     @objc func logout() {
-     UdacityClient.sharedInstance().logout { (data, error) in
+     UdacityClient.sharedInstance().logout { [unowned self] (data, error) in
         
         if error != nil {
             

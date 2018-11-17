@@ -28,6 +28,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var findLocationButton: UIButton!
     
+    var regionRadius: CLLocationDistance = 1000
     
     lazy var geocoder = CLGeocoder()
 
@@ -48,6 +49,13 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         view.addSubview(topView)
         view.addSubview(middleView)
         view.addSubview(bottomView)
+    }
+    
+    func centerMapOnLocation(location: CLLocation) {
+        
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
+                                                  latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        mapView.setRegion(coordinateRegion, animated: true)
     }
     
     func showOrHideButtonAndMap() {
@@ -95,8 +103,8 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
                 guard let location = location else {return}
                 let lat = location.coordinate.latitude
                 let long = location.coordinate.longitude
-                //let initialLocation = CLLocation(latitude: lat, longitude: long)
-                //centerMapOnLocation(location: initialLocation)
+                let initialLocation = CLLocation(latitude: lat, longitude: long)
+                centerMapOnLocation(location: initialLocation)
                 var coordinate = CLLocationCoordinate2D()
                 coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
                 
@@ -123,12 +131,12 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         self.present(ac, animated: true, completion: nil)
     }
     
+    
 
     
     func navigationButtons () {
         navigationItem.title = "Add Location"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(cancel))
-        
     }
     
     func topAndMiddleViewHidden() {
@@ -147,6 +155,11 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         visibleViewsForMap()
         finishButton.isHidden = false
         topAndMiddleViewHidden()
+    }
+    
+    @IBAction func postingALocation(_ sender: Any) {
+        postingALocation()
+        navigationController?.popToRootViewController(animated: true)
     }
     
     

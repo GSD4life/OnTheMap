@@ -21,7 +21,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
 override func viewDidLoad() {
     super.viewDidLoad()
-    self.mapView.delegate = self
+    mapView.delegate = self
 }
     
 override func viewWillAppear(_ animated: Bool) {
@@ -30,7 +30,7 @@ override func viewWillAppear(_ animated: Bool) {
 
     func getMapInfo() {
         
-        ParseClient.sharedInstance().getStudentsLocation() { (uniqueData, error) in
+        ParseClient.sharedInstance().getStudentsLocation() { [unowned self] (uniqueData, error) in
             if let uniqueData = uniqueData {
                 self.uniqueData = uniqueData
                 
