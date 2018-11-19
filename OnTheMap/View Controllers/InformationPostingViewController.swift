@@ -208,7 +208,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
                         annotation.title = "\(first) \(last)"
                         annotation.subtitle = mediaURL
                         
-                        print(String(describing:annotation.title))
+                        print(String(describing:annotation.title ?? ""))
                         // Finally we place the annotation in an array of annotations.
                         annotations.append(annotation)
                         
@@ -220,6 +220,8 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
+    
+    
     
     func puttingANewLocation() {
         ParseClient.sharedInstance().puttingAStudentLocation { (studentData, error) in

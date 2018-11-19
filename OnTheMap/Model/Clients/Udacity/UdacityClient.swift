@@ -15,7 +15,7 @@ class UdacityClient: NSObject {
         /* 1. Set the parameters */
         
         /* 2/3. Build the URL, Configure the request */
-        var request = URLRequest(url: URL(string: "https://gae.udacity.com/api/session")!)
+        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

@@ -15,7 +15,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    
     var uniqueData: [StudentInformation] = [StudentInformation]()
     
         
@@ -56,7 +55,7 @@ override func viewWillAppear(_ animated: Bool) {
                         annotation.title = "\(first) \(last)"
                         annotation.subtitle = mediaURL
     
-                        print(String(describing:annotation.title))
+                        print(String(describing:annotation.title ?? ""))
                         // Finally we place the annotation in an array of annotations.
                         annotations.append(annotation)
                     
