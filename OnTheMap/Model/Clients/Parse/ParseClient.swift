@@ -106,6 +106,7 @@ class ParseClient: NSObject {
     
     func taskForPost(completionHandlerForPost: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
+        
         let json = "{\"uniqueKey\": \"\(Constants.UniqueKeyValue)\", \"firstName\": \"\(JSONBodyKeys.firstName)\", \"lastName\": \"\(JSONBodyKeys.lastName)\",\"mapString\": \"\(JSONBodyKeys.mapString)\", \"mediaURL\": \"\(JSONBodyKeys.mediaURL)\",\"latitude\": \(JSONBodyKeys.latitude), \"longitude\": \(JSONBodyKeys.longitude)}"
         var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
         request.httpMethod = "POST"
@@ -219,6 +220,15 @@ class ParseClient: NSObject {
         }
         
         completionHandlerForConvertData(parsedResult, nil)
+    }
+    
+   
+    func substituteKeyInMethod(_ method: String, key: String, value: String) -> String? {
+        if method.range(of: "{\(key)}") != nil {
+            return method.replacingOccurrences(of: "{\(key)}", with: value)
+        } else {
+            return nil
+        }
     }
     
 

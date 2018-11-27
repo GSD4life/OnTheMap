@@ -8,6 +8,9 @@
 
 import UIKit
 
+var studentFirstName = String()
+var studentLastName = String()
+
 extension UdacityClient {
     
     func getPublicUserData(_ completionHandlerForUserData: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
@@ -20,9 +23,11 @@ extension UdacityClient {
         } else {
             if let getUsersInfo = results?[JSONUserKey.user] as? [String:AnyObject] {
                 guard let firstName = getUsersInfo["first_name"] as? String else {return}
-                print(firstName)
+                studentFirstName = firstName
+                print(studentFirstName)
                 guard let lastName = getUsersInfo["last_name"] as? String else {return}
-                print(lastName)
+                studentLastName = lastName
+                print(studentLastName)
                 
              completionHandlerForUserData(getUsersInfo, nil)
             
