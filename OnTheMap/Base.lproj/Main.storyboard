@@ -207,6 +207,10 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ecx-0k-0TZ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </mapView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Exo-5A-AS7">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSa-KW-0SX" userLabel="Top View">
                                 <rect key="frame" x="16" y="29" width="240" height="162"/>
                                 <subviews>
@@ -304,6 +308,7 @@
                     </view>
                     <connections>
                         <outlet property="URLTextField" destination="bo3-yM-9oh" id="KrA-R9-vti"/>
+                        <outlet property="activityIndicator" destination="Exo-5A-AS7" id="MaN-Df-hO9"/>
                         <outlet property="bottomView" destination="KfP-2b-jrZ" id="Sdt-Dh-oW7"/>
                         <outlet property="findLocationButton" destination="3Ke-qR-8wa" id="3Cx-cs-OPT"/>
                         <outlet property="finishButton" destination="XYB-uU-Bff" id="Dgy-7H-2vy"/>

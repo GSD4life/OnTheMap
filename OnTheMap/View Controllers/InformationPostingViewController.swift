@@ -22,6 +22,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var middleView: UIView!
     @IBOutlet weak var bottomView: UIView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var finishButton: UIButton!
@@ -29,6 +30,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var findLocationButton: UIButton!
     
     var regionRadius: CLLocationDistance = 1000
+    //var locationManager: CLLocationManager!
     
     lazy var geocoder = CLGeocoder()
     
@@ -37,14 +39,49 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         mapView.delegate = self
         navigationButtons()
+        //createLocationManager()
+        
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
      showOrHideButtonAndMap()
      addingViewsToLayout()
 
     }
+    
+    /*func createLocationManager() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }*/
+    
+    /*func enableLocationServices(){
+        
+        switch CLLocationManager.authorizationStatus() {
+        
+        case .notDetermined:
+            // Request when-in-use authorization initially
+            locationManager.requestWhenInUseAuthorization()
+            break
+            
+        case .restricted, .denied:
+            // Disable location features
+            enableLocationServices()
+            break
+            
+        case .authorizedWhenInUse, .authorizedAlways:
+             assert(CLAuthorizationStatus.authorizedWhenInUse == .authorizedWhenInUse, "Location services is not authorized for when in use")
+             assert(CLAuthorizationStatus.authorizedAlways == .authorizedAlways, "Location services is not set to always authorized")
+            break
+            
+        default:
+            return
+            
+        
+        }
+        
+    } */
     
     func addingViewsToLayout() {
         view.addSubview(topView)
@@ -92,6 +129,8 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
         // Update View
         missingInfo()
+        activityIndicator.stopAnimating()
+        activityIndicator.hidesWhenStopped = true
         
         if let error = error {
             print("Unable to Forward Geocode Address (\(error))")
@@ -135,6 +174,12 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         self.present(ac, animated: true, completion: nil)
     }
     
+    func locationServicesAlert() {
+      let ac = UIAlertController(title: "Location Service Issues", message: "Please enable location services", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        self.present(ac, animated: true, completion: nil)
+    }
+    
     
 
     
@@ -159,6 +204,8 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         visibleViewsForMap()
         finishButton.isHidden = false
         topAndMiddleViewHidden()
+        activityIndicator.startAnimating()
+        
     }
     
     @IBAction func postingALocation(_ sender: Any) {

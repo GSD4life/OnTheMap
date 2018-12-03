@@ -11,12 +11,21 @@ import UIKit
 extension UdacityClient {
 
 struct UdacityUser {
-   var uniqueKey: String?
-   var firstName: String?
-   var lastName: String?
-}
+   var uniqueKey: String? = "no key"
+   var firstName: String? = "no first name"
+   var lastName: String? = "no last name"
 
     
+    init(dictionary: [String:AnyObject?]) {
+        
+        uniqueKey = dictionary["key"] as? String ?? ""
+        firstName = dictionary["first_name"] as? String ?? ""
+        lastName = dictionary["last_name"] as? String ?? ""
+        
+        
+    }
+
+}
     
 struct JSONUserKey {
     static let user = "user"

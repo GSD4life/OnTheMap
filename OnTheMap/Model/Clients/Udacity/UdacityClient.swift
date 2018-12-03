@@ -10,12 +10,14 @@ import UIKit
 
 class UdacityClient: NSObject {
     
+
+    
     func login(email: String, password: String, completionHandlerForLogin: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> Void {
         
         /* 1. Set the parameters */
         
         /* 2/3. Build the URL, Configure the request */
-        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -64,7 +66,7 @@ class UdacityClient: NSObject {
     
     func logout(completionHandlerToLogout: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> Void {
         
-        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
         let sharedCookieStorage = HTTPCookieStorage.shared
@@ -115,7 +117,7 @@ class UdacityClient: NSObject {
         
         //var userID = UdacityUser.uniqueKey
         
-    let request = URLRequest(url: URL(string: "https://gae.udacity.com/api/users/me")!)
+    let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/users/me")!)
     let session = URLSession.shared
     let task = session.dataTask(with: request) { data, response, error in
         

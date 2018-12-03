@@ -71,6 +71,7 @@ class LoginViewController: UIViewController {
     
 
     @IBAction func loginPressed(_ sender: AnyObject) {
+        
         userDidTapView(self)
         
         if  emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
@@ -81,11 +82,13 @@ class LoginViewController: UIViewController {
                 self.setUIEnabled(true)
                 
             if let data = data {
-                guard let jsonAccountKey = data["account"] as? [String:AnyObject] else {return}
+                guard let jsonAccountKey = data["account"] as? [String:AnyObject?] else {return}
+            
                 guard let studentKey = jsonAccountKey["key"] as? String else {return}
                 self.userKey = studentKey
-                print(self.userKey)
+                //print(self.userKey)
                 self.getUserInfo(studentKey: self.userKey)
+        
             }
                 
             if error != nil {
