@@ -10,7 +10,9 @@ import UIKit
 import Foundation
 
 extension ParseClient {
-
+    
+    
+   // Mark: Function used to get Student(s) location to populate MapView
    func getStudentsLocation(_ completionHandlerForStudents: @escaping (_ result: [StudentInformation]?, _ error: NSError?) -> Void) {
 
         let _ = taskForGet { (results, error) in
@@ -31,7 +33,7 @@ extension ParseClient {
         }
     }
 
-    
+    // Mark: Function used to get a single student location. The response/data is formatted into the model (StudentInformation Struct) for a single person.
      func getLocationForOneStudent(_ completionHandlerForOneStudent: @escaping (_ result: [StudentInformation]?, _ error: NSError?) -> Void) {
         
         let parameters = [Constants.queryName:Constants.queryValues, Constants.queryLimit: Constants.value, Constants.order:Constants.updatedAt]
@@ -63,7 +65,7 @@ extension ParseClient {
         }
     )}
     
-
+    // Mark: Function used to post a location to the server.
     func postingStudentLocation(_ completionHandlerForPostingLocation: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
         
         let _ = taskForPost { (results, error) in
@@ -73,7 +75,7 @@ extension ParseClient {
                 completionHandlerForPostingLocation(nil, error)
             } else {
                 if let results = results?[JSONResponseKeys.objectId] as? String {
-                    let studentObjectId = results
+                    //let studentObjectId = results
                     completionHandlerForPostingLocation(results, nil)
                 } else {
                     completionHandlerForPostingLocation(nil, NSError(domain: "postingStudentLocation", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse postingStudentLocation"]))
@@ -82,6 +84,7 @@ extension ParseClient {
         }
     }
     
+    // Mark: Function used allow a user to put a new location to the server.
     func puttingAStudentLocation(_ completionHandlerForPuttingLocation: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
         
         let _ = taskForPuttingALocation { (results, error) in

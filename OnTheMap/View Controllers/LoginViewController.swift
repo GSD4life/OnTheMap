@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     var keyboardOnScreen = false
     var appDelegate: AppDelegate!
     var userKey = String()
+    var student = [StudentInformation]()
     
     // Mark: Outlets
     
@@ -83,10 +84,10 @@ class LoginViewController: UIViewController {
                 
             if let data = data {
                 guard let jsonAccountKey = data["account"] as? [String:AnyObject?] else {return}
-            
                 guard let studentKey = jsonAccountKey["key"] as? String else {return}
                 self.userKey = studentKey
-                //print(self.userKey)
+                
+                print(self.userKey)
                 self.getUserInfo(studentKey: self.userKey)
         
             }

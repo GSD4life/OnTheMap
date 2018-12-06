@@ -11,7 +11,7 @@ import UIKit
 class UdacityClient: NSObject {
     
 
-    
+    // Mark: Networking code to login
     func login(email: String, password: String, completionHandlerForLogin: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> Void {
         
         /* 1. Set the parameters */
@@ -64,6 +64,7 @@ class UdacityClient: NSObject {
         
     }
     
+    // Mark: Networking Code to logout
     func logout(completionHandlerToLogout: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> Void {
         
         var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
@@ -113,6 +114,7 @@ class UdacityClient: NSObject {
         
     }
     
+    // Mark: Networking code to get public user data
     func getUserData(completionHandlerToGetData: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         //var userID = UdacityUser.uniqueKey
@@ -184,3 +186,5 @@ class UdacityClient: NSObject {
     }
 }
 
+// Sources:
+// Udacity IOS program (Network Requests & GCD), Udacity forums, mentors, apple, and cocoacasts).

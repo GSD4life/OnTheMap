@@ -10,6 +10,8 @@ import UIKit
 
 class ParseClient: NSObject {
     
+    
+    // Mark: Network code used to get student(s) inforamtion
     func taskForGet(completionHandlerToGetData: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask{
        
     var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt")!)
@@ -55,7 +57,7 @@ class ParseClient: NSObject {
     
     }
     
-    
+    // Mark: Network code used to get information for a single student
     func taskForStudent(parameters: [String:AnyObject],  completionHandlerToGetLocation: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         var parameterswithKey = parameters
@@ -104,6 +106,7 @@ class ParseClient: NSObject {
     
     }
     
+    // Mark: Network code used to post info to API
     func taskForPost(completionHandlerForPost: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         
@@ -154,6 +157,7 @@ class ParseClient: NSObject {
         
     }
     
+    // Mark: Network code used so a student can update and/or put a new location on the map
     func taskForPuttingALocation(completionHandlerForPutting: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         let json = "{\"uniqueKey\": \"\(Constants.UniqueKeyValue)\", \"firstName\": \"\(JSONBodyKeys.firstName)\", \"lastName\": \"\(JSONBodyKeys.lastName)\",\"mapString\": \"\(JSONBodyKeys.mapString)\", \"mediaURL\": \"\(JSONBodyKeys.mediaURL)\",\"latitude\": \(JSONBodyKeys.latitude), \"longitude\": \(JSONBodyKeys.longitude)}"
@@ -203,12 +207,7 @@ class ParseClient: NSObject {
         
     }
     
-   
-    
-    
-    
-// given raw JSON, return a usable Foundation object
-    // given raw JSON, return a usable Foundation object
+    // Mark: Helper function
     private func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
         
         var parsedResult: AnyObject! = nil
@@ -222,43 +221,31 @@ class ParseClient: NSObject {
         completionHandlerForConvertData(parsedResult, nil)
     }
     
-   
-    func substituteKeyInMethod(_ method: String, key: String, value: String) -> String? {
-        if method.range(of: "{\(key)}") != nil {
-            return method.replacingOccurrences(of: "{\(key)}", with: value)
-        } else {
-            return nil
+    // Mark: Shared Instance
+    class func sharedInstance() -> ParseClient {
+        struct Singleton {
+            static var sharedInstance = ParseClient()
         }
+        return Singleton.sharedInstance
     }
     
-
- // Helper functions
-    
-// Mark: Shared Instance
-
-class func sharedInstance() -> ParseClient {
-    struct Singleton {
-        static var sharedInstance = ParseClient()
-    }
-    return Singleton.sharedInstance
-}
-    
+    // Mark: Helper function to build a URL so all items are properly escaped/allowed.
     private func URLFromParameters(_ parameters: [String:AnyObject]) -> URL {
         
-        var components = URLComponents()
-        components.scheme = ParseClient.Constants.scheme
-        components.host = ParseClient.Constants.host
-        components.path = ParseClient.Constants.path
-        components.queryItems = [URLQueryItem]()
-        
-        
-        for (key, value) in parameters {
-            let queryItem = URLQueryItem(name: key, value: "\(value)")
-            components.queryItems!.append(queryItem)
-        }
-        
-        return components.url!
+    var components = URLComponents()
+    components.scheme = ParseClient.Constants.scheme
+    components.host = ParseClient.Constants.host
+    components.path = ParseClient.Constants.path
+    components.queryItems = [URLQueryItem]()
+    
+    
+    for (key, value) in parameters {
+        let queryItem = URLQueryItem(name: key, value: "\(value)")
+        components.queryItems!.append(queryItem)
     }
+    
+    return components.url!
+}
     
     
     

@@ -299,7 +299,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     // method in TableViewDataSource
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        print("delegate one reached")
+        //print("delegate one reached")
         let reuseId = "pin"
 
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
@@ -323,7 +323,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     // This delegate method is implemented to respond to taps. It opens the system browser
     // to the URL specified in the annotationViews subtitle property.
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        print("delegate two reached")
+        //print("delegate two reached")
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
