@@ -246,12 +246,8 @@ class ParseClient: NSObject {
     
     return components.url!
 }
-    
-    
-    
-    
-    
-
-    
 
 }
+
+// Sources:
+// Udacity IOS program (Network Requests & GCD), Udacity forums, mentors, apple, and cocoacasts).

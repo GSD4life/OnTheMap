@@ -56,7 +56,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }*/
     
-    /*func enableLocationServices(){
+    /*func allowLocationServices(){
         
         switch CLLocationManager.authorizationStatus() {
         
@@ -67,7 +67,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             
         case .restricted, .denied:
             // Disable location features
-            enableLocationServices()
+            allowLocationServices()
             break
             
         case .authorizedWhenInUse, .authorizedAlways:
@@ -77,11 +77,10 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             
         default:
             return
-            
         
         }
         
-    } */
+    }*/
     
     func addingViewsToLayout() {
         view.addSubview(topView)
@@ -333,3 +332,6 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     }
 
 }
+
+// Sources:
+// Udacity IOS program (Network Requests & GCD), Udacity forums, mentors, apple, and cocoacasts).

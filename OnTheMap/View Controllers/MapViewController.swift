@@ -108,3 +108,5 @@ func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, callou
 
 }
 
+// Sources:
+// Udacity IOS program (Network Requests & GCD), Udacity forums, mentors, apple, and cocoacasts).

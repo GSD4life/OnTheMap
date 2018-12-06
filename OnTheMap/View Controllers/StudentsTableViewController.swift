@@ -70,7 +70,7 @@ class StudentsTableViewController: UITableViewController {
         let app = UIApplication.shared
         app.open(URL(string: webAddress)!)
     }
-    
-    
- 
 }
+
+// Sources:
+// Udacity IOS program (Network Requests & GCD), Udacity forums, mentors, apple, and cocoacasts).
