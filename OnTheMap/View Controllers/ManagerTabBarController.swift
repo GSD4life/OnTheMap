@@ -84,4 +84,4 @@ var refresh = UIButton()
 }
 
 // Sources:
-// Udacity IOS program (Network Requests & GCD), Udacity forums, mentors, apple, and cocoacasts).
+// Udacity IOS program (Network Requests & GCD), Udacity forums, mentors, apple, cocoacasts, raywenderlich.com).
