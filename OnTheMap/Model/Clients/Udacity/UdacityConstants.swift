@@ -11,16 +11,16 @@ import UIKit
 extension UdacityClient {
 
 struct UdacityUser {
-   var uniqueKey: String? = "no key"
-   var firstName: String? = "no first name"
-   var lastName: String? = "no last name"
+   var uniqueKey: String?
+   var firstName: String?
+   var lastName: String?
 
     
     init(dictionary: [String:AnyObject?]) {
         
-        uniqueKey = dictionary["key"] as? String ?? ""
-        firstName = dictionary["first_name"] as? String ?? ""
-        lastName = dictionary["last_name"] as? String ?? ""
+        uniqueKey = dictionary["key"] as? String ?? "1234"
+        firstName = dictionary["first_name"] as? String ?? "Ich"
+        lastName = dictionary["last_name"] as? String ?? "Ni"
         
         
     }

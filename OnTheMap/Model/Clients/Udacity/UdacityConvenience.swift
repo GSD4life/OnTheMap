@@ -19,14 +19,22 @@ extension UdacityClient {
     let _ = getUserData { (results, error) in
         
         if let error = error {
+            
              assert(error == error, "assert error message")
              completionHandlerForUserData(nil, NSError(domain: "getPublicUserData parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse get Pulic User  location data"]))
         } else {
             if let results = results?["email"] as? [String:AnyObject] {
                 // Using the "user" key does not work as map does not populate and app stalls at login page. The user key stopped working on 11/28/18 when udacity began updating their URLs for getting public user data and login. No information provided by support.
                 //guard let firstName = results["first_name"] as? String else {return}
-                //print(firstName) - not able to retrieve first name
-            
+                //print(firstName)
+
+                let udacityStudent = UdacityUser(dictionary: results)
+                guard let firstName = udacityStudent.firstName else {return}
+                guard let lastName = udacityStudent.lastName else {return}
+                guard let uniqueKey = udacityStudent.uniqueKey else {return}
+                print(firstName, lastName, uniqueKey)
+               
+                
              completionHandlerForUserData(results, nil)
                 
             }
