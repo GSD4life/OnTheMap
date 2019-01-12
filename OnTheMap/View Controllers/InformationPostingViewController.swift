@@ -215,8 +215,8 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     
     func postingLocation() {
         ParseClient.sharedInstance().postingStudentLocation { (data, error) in
-            if error != nil {
-                print(error ?? "empty error")
+            if let error = error {
+                print(error)
             } else {
                 if let data = data {
                     print(data)
@@ -232,7 +232,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             if let studentData = studentData {
                 self.studentData = studentData
                 
-                var annotations = [MKPointAnnotation]()
+                var mapAnnotations = [MKPointAnnotation]()
                 
                 performUIUpdatesOnMain {
                     for students in self.studentData {
@@ -249,18 +249,18 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
                         guard let mediaURL = students.mediaURL else {return}
                         
                         // Here we create the annotation and set its coordinate, title, and subtitle properties
-                        let annotation = MKPointAnnotation()
-                        annotation.coordinate = coordinate
-                        annotation.title = "\(first) \(last)"
-                        annotation.subtitle = mediaURL
+                        let mapAnnotation = MKPointAnnotation()
+                        mapAnnotation.coordinate = coordinate
+                        mapAnnotation.title = "\(first) \(last)"
+                        mapAnnotation.subtitle = mediaURL
                         
-                        print(String(describing:annotation.title ?? ""))
+                        print(String(describing:mapAnnotation.title ?? ""))
                         // Finally we place the annotation in an array of annotations.
-                        annotations.append(annotation)
+                        mapAnnotations.append(mapAnnotation)
                         
                     }
                     // When the array is complete, we add the annotations to the map.
-                    self.mapView.addAnnotations(annotations)
+                    self.mapView.addAnnotations(mapAnnotations)
                     
                 }
             }

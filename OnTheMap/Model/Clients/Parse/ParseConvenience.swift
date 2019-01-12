@@ -38,7 +38,7 @@ extension ParseClient {
         
         let parameters = [Constants.queryName:Constants.queryValues, Constants.queryLimit: Constants.value, Constants.order:Constants.updatedAt]
         
-        let _ = taskForStudent(parameters: parameters as [String:AnyObject], completionHandlerToGetLocation:  { (results, error) in
+        let _ = taskForStudent(parameters: parameters as [String:AnyObject], completionHandlerToGetLocation: { (results, error) in
     
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {

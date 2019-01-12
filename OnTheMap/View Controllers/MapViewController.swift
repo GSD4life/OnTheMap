@@ -28,6 +28,7 @@ override func viewWillAppear(_ animated: Bool) {
 }
 
     func getMapInfo() {
+    
         
         ParseClient.sharedInstance().getStudentsLocation() { [unowned self] (uniqueData, error) in
             if let uniqueData = uniqueData {
@@ -35,11 +36,14 @@ override func viewWillAppear(_ animated: Bool) {
                 
                 var annotations = [MKPointAnnotation]()
                 
+                
                 performUIUpdatesOnMain {
+                    self.mapView.removeAnnotations(self.mapView.annotations)
+                    
                     for students in self.uniqueData {
                         
-                        let lat = CLLocationDegrees(students.latitude!)
-                        let long = CLLocationDegrees(students.longitude!)
+                        let lat = CLLocationDegrees(students.latitude ?? 0)
+                        let long = CLLocationDegrees(students.longitude ?? 0)
                         
                         // The lat and long are used to create a CLLocationCoordinates2D instance.
                         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		191B3149212AF4D9009EA15D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191B3148212AF4D9009EA15D /* MapViewController.swift */; };
+		19302B0F21BEBD6F00A2CBA8 /* MapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19302B0E21BEBD6F00A2CBA8 /* MapDelegate.swift */; };
 		1930B613214D5F5D00F59171 /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1930B612214D5F5D00F59171 /* InformationPostingViewController.swift */; };
 		197AC5912115E90700B0EBD4 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197AC5902115E90700B0EBD4 /* UdacityClient.swift */; };
 		197AC5932115E93200B0EBD4 /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197AC5922115E93200B0EBD4 /* UdacityConstants.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		191B3148212AF4D9009EA15D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		19302B0E21BEBD6F00A2CBA8 /* MapDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDelegate.swift; sourceTree = "<group>"; };
 		1930B612214D5F5D00F59171 /* InformationPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
 		197AC5902115E90700B0EBD4 /* UdacityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		197AC5922115E93200B0EBD4 /* UdacityConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				19CF71E621401145004CA108 /* ParseConvenience.swift */,
 				19C90FB3213079D700607499 /* ParseConstants.swift */,
 				197BC0FB213429A000FC517B /* StudentLocations.swift */,
+				19302B0E21BEBD6F00A2CBA8 /* MapDelegate.swift */,
 			);
 			path = Parse;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				197AC5912115E90700B0EBD4 /* UdacityClient.swift in Sources */,
 				197AC5932115E93200B0EBD4 /* UdacityConstants.swift in Sources */,
 				19E3E6F7212C58B200308D54 /* ManagerTabBarController.swift in Sources */,
+				19302B0F21BEBD6F00A2CBA8 /* MapDelegate.swift in Sources */,
 				19ED262C20FE83B6009B05DD /* LoginViewController.swift in Sources */,
 				19C1B30921022EB700300DB7 /* GCDBlackBox.swift in Sources */,
 				19ED262A20FE83B6009B05DD /* AppDelegate.swift in Sources */,

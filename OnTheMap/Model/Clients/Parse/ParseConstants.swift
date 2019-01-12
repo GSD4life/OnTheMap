@@ -52,7 +52,7 @@ struct Constants {
     static let host = "parse.udacity.com"
     static let path = "/parse/classes/StudentLocation"
     static let UniqueKeyValue = "1234"
-//    11138462743
+//    11138462743 - actual user key
     static let queryValues = "{\"uniqueKey\": \"1234\"}"
 }
     

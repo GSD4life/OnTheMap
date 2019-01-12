@@ -79,20 +79,24 @@ class LoginViewController: UIViewController {
             debugTextLabel.text = "Username or Password Empty."
         } else {
             setUIEnabled(false)
-             UdacityClient.sharedInstance().login(email: emailTextField.text!, password: passwordTextField.text!, completionHandlerForLogin: { [unowned self] (data, error) in
+            UdacityClient.sharedInstance().authenticateUser(email: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
                 self.setUIEnabled(true)
-                
-            if let data = data {
-                guard let jsonAccountKey = data["account"] as? [String:AnyObject?] else {return}
-                guard let studentKey = jsonAccountKey["key"] as? String else {return}
-                self.userKey = studentKey
-                
-                print(self.userKey)
-                self.getUserInfo(studentKey: self.userKey)
+                if let _ = result {
+                    self.getUserInfo()
+                    
+                } else {
+//             UdacityClient.sharedInstance().login(email: emailTextField.text!, password: passwordTextField.text!, completionHandlerForLogin: { [unowned self] (data, error) in
+// //               self.setUIEnabled(true)
+            
+//            if let data = data {
+//                guard let jsonAccountKey = data["account"] as? [String:AnyObject?] else {return}
+//                guard let studentKey = jsonAccountKey["key"] as? String else {return}
+//                self.userKey = studentKey
+//
+//                print(self.userKey)
+//                self.getUserInfo(studentKey: self.userKey)
         
-            }
-                
-            if error != nil {
+                if error != nil {
                 
                 let alert = UIAlertController(title: "Login Failed", message: "Do you want to try again as the e-mail or password entered is incorrect.", preferredStyle: .alert)
                 
@@ -102,18 +106,20 @@ class LoginViewController: UIViewController {
                 self.present(alert, animated: true)
                 
             }
-        })
+        }
             
             }
         }
      }
+}
+
 
 extension LoginViewController {
     
-    func getUserInfo(studentKey: String){
+    func getUserInfo(){
         UdacityClient.sharedInstance().getPublicUserData { [unowned self] (data, error) in
-            if error != nil {
-                print(error ?? "empty error")
+            if let error = error {
+                print(error)
             } else {
                 if let data = data {
                     self.completeLogin(data)

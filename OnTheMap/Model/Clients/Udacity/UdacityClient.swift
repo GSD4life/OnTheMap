@@ -10,6 +10,10 @@ import UIKit
 
 class UdacityClient: NSObject {
     
+    var userKey = ""
+    var lastName = ""
+    var firstName = ""
+    
 
     // Mark: Networking code to login
     func login(email: String, password: String, completionHandlerForLogin: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> Void {
@@ -115,11 +119,11 @@ class UdacityClient: NSObject {
     }
     
     // Mark: Networking code to get public user data
-    func getUserData(completionHandlerToGetData: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    func getUserData(key: String, completionHandlerToGetData: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         //var userID = UdacityUser.uniqueKey
         
-    let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/users/me")!)
+    let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/users/\(userKey)")!)
     let session = URLSession.shared
     let task = session.dataTask(with: request) { data, response, error in
         
@@ -151,6 +155,7 @@ class UdacityClient: NSObject {
         print(String(data: newData, encoding: .utf8)!)
         
         self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandlerToGetData)
+        
         
         }
         
