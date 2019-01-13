@@ -34,32 +34,25 @@ extension UdacityClient {
     // Mark: Function used to call and get public user information
     func getPublicUserData(_ completionHandlerForUserData: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
     
-        let _ = getUserData(key: self.userKey) { (results, error) in
+        let _ = getUserData(key: self.userKey) { [unowned self] (results, error) in
         print(self.userKey)
         if let error = error {
             
              assert(error == error, "assert error message")
              completionHandlerForUserData(nil, NSError(domain: "getPublicUserData parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse get Pulic User  location data"]))
         } else {
-            if let results = results?["email"] as? [String:AnyObject] {
-                /* Using the "user" key does not work as map does not populate and app stalls at login page. The user key stopped working on 11/28/18 when udacity began updating their URLs for getting public user data and login. No information provided by support. */
-                let firstName = results["first_name"] as? String ?? "Ich"
-                self.firstName = firstName
-                print(firstName)
-                let lastName = results["last_name"] as? String ?? "Ni"
-                self.lastName = lastName
-//                assert(firstName == "Ich", "Student's first name was not found")
-//                assert(lastName == "San", "Student's last name was not found")
-//                var udacityStudent = UdacityUser(dictionary: results)
-//                udacityStudent.firstName = firstName
-//                udacityStudent.lastName = lastName
-//                print(udacityStudent)
-//                guard let firstName = udacityStudent.firstName else {return}
-//                guard let lastName = udacityStudent.lastName else {return}
-//                guard let uniqueKey = udacityStudent.uniqueKey else {return}
-//                print(firstName, lastName, uniqueKey)
-               
+            guard let firstName = results?["first_name"] as? String else {return}
+            guard let LastName = results?["last_name"] as? String else {return}
+            self.firstName = firstName
+            self.lastName = LastName
+            print(firstName, LastName, terminator: "")
                 
+                /* Using the "user" key does not work as map does not populate and app stalls at login page. The user key stopped working on 11/28/18 when udacity began updating their URLs for getting public user data and login. No information provided by support. */
+//                let firstName = results["first_name"] as? String ?? "Ich"
+//                self.firstName = firstName
+//                let lastName = results["last_name"] as? String ?? "Ni"
+//                self.lastName = lastName
+//                print(firstName, lastName, terminator: "")
              completionHandlerForUserData(results, nil)
                 
             }
@@ -68,7 +61,7 @@ extension UdacityClient {
 }
     
     
-}
+
 
 // Sources:
 // Udacity IOS program (Network Requests & GCD), Udacity forums, mentors, apple, cocoacasts, raywenderlich.com).

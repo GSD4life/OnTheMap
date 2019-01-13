@@ -13,7 +13,7 @@ class LoginViewController: UIViewController {
     
     var keyboardOnScreen = false
     var appDelegate: AppDelegate!
-    var userKey = String()
+    var userKey = ""
     var student = [StudentInformation]()
     
     // Mark: Outlets
@@ -79,23 +79,14 @@ class LoginViewController: UIViewController {
             debugTextLabel.text = "Username or Password Empty."
         } else {
             setUIEnabled(false)
-            UdacityClient.sharedInstance().authenticateUser(email: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
+            UdacityClient.sharedInstance().authenticateUser(email: emailTextField.text!, password: passwordTextField.text!) { [unowned self] (result, error) in
                 self.setUIEnabled(true)
+                
                 if let _ = result {
                     self.getUserInfo()
                     
                 } else {
-//             UdacityClient.sharedInstance().login(email: emailTextField.text!, password: passwordTextField.text!, completionHandlerForLogin: { [unowned self] (data, error) in
-// //               self.setUIEnabled(true)
-            
-//            if let data = data {
-//                guard let jsonAccountKey = data["account"] as? [String:AnyObject?] else {return}
-//                guard let studentKey = jsonAccountKey["key"] as? String else {return}
-//                self.userKey = studentKey
-//
-//                print(self.userKey)
-//                self.getUserInfo(studentKey: self.userKey)
-        
+
                 if error != nil {
                 
                 let alert = UIAlertController(title: "Login Failed", message: "Do you want to try again as the e-mail or password entered is incorrect.", preferredStyle: .alert)
