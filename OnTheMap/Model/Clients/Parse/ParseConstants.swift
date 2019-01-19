@@ -31,14 +31,14 @@ struct UsersLocation {
 }
     
     struct JSONBodyKeys {
-        static let objectId = JSONResponseKeys.objectId
-        static let uniqueKey = Constants.UniqueKeyValue
-        static let firstName = JSONResponseKeys.firstName
-        static let lastName = JSONResponseKeys.lastName
-        static let mapString = JSONResponseKeys.mapString
-        static let mediaURL = JSONResponseKeys.mediaURL
-        static let latitude: Double = 0.00
-        static let longitude: Double = 0.00
+        static var objectId = JSONResponseKeys.objectId
+        static var uniqueKey = Constants.UniqueKeyValue
+        static var firstName = JSONResponseKeys.firstName
+        static var lastName = JSONResponseKeys.lastName
+        static var mapString = JSONResponseKeys.mapString
+        static var mediaURL = JSONResponseKeys.mediaURL
+        static var latitude: Double = 0.00
+        static var longitude: Double = 0.00
     }
     
 struct Constants {

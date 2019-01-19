@@ -66,9 +66,9 @@ extension ParseClient {
     )}
     
     // Mark: Function used to post a location to the server.
-    func postingStudentLocation(_ completionHandlerForPostingLocation: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
+    func postingStudentLocation(mapString: String, mediaURL: String, latitude: Double, longitude: Double, _ completionHandlerForPostingLocation: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
         
-        let _ = taskForPost { (results, error) in
+        let _ = taskForPost(mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude) { (results, error) in
             
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {

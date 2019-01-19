@@ -10,8 +10,14 @@ import UIKit
 
 class ParseClient: NSObject {
     
+    var mapString = ""
+    var url = ""
+    var mediaURL = ""
+    var longitude: Double = 0.0
+    var latitiude: Double = 0.0
     
-    // Mark: Network code used to get student(s) inforamtion
+    
+    // Mark: Network code used to get student(s) information
     func taskForGet(completionHandlerToGetData: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask{
        
     var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt")!)
@@ -107,10 +113,10 @@ class ParseClient: NSObject {
     }
     
     // Mark: Network code used to post info to API
-    func taskForPost(completionHandlerForPost: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    func taskForPost(mapString: String, mediaURL: String, latitude: Double, longitude: Double, completionHandlerForPost: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         
-        let json = "{\"uniqueKey\": \"\(Constants.UniqueKeyValue)\", \"firstName\": \"\(JSONBodyKeys.firstName)\", \"lastName\": \"\(JSONBodyKeys.lastName)\",\"mapString\": \"\(JSONBodyKeys.mapString)\", \"mediaURL\": \"\(JSONBodyKeys.mediaURL)\",\"latitude\": \(JSONBodyKeys.latitude), \"longitude\": \(JSONBodyKeys.longitude)}"
+        let json = "{\"uniqueKey\": \"\(UdacityClient.sharedInstance().userKey)\", \"firstName\": \"\(UdacityClient.sharedInstance().firstName)\", \"lastName\": \"\(UdacityClient.sharedInstance().lastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}"
         var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
         request.httpMethod = "POST"
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")

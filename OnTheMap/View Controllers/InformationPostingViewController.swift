@@ -13,6 +13,8 @@ import MapKit
 class InformationPostingViewController: UIViewController, MKMapViewDelegate {
 
     var studentData: [StudentInformation] = [StudentInformation]()
+    var lat: Double? = 0.0
+    var long: Double? = 0.0
     
     
     @IBOutlet weak var locationTextField: UITextField!
@@ -81,6 +83,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         }
         
     }*/
+    
     
     func addingViewsToLayout() {
         view.addSubview(topView)
@@ -159,6 +162,8 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             
             if let location = location {
                 let coordinate = location.coordinate
+                lat = coordinate.latitude
+                long = coordinate.longitude
                 print("The coordinates are Lat: \(coordinate.latitude) and Long: \(coordinate.longitude)"
                     
             )}
@@ -214,7 +219,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     
     
     func postingLocation() {
-        ParseClient.sharedInstance().postingStudentLocation { (data, error) in
+        ParseClient.sharedInstance().postingStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: lat ?? 0.0, longitude: long ?? 0.0) { (data, error) in
             if let error = error {
                 print(error)
             } else {
@@ -227,7 +232,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     
     
     func singleStudentLocation () {
-        ParseClient.sharedInstance().getLocationForOneStudent {  (studentData, error) in
+        ParseClient.sharedInstance().getLocationForOneStudent { (studentData, error) in
         
             if let studentData = studentData {
                 self.studentData = studentData

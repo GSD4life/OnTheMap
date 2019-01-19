@@ -89,35 +89,38 @@ class LoginViewController: UIViewController {
 
                 if error != nil {
                 
-                let alert = UIAlertController(title: "Login Failed", message: "Do you want to try again as the e-mail or password entered is incorrect.", preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
-                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-                
-                self.present(alert, animated: true)
-                
+                self.loginFailure()
+               }
+              }
             }
+          }
         }
-            
-            }
-        }
-     }
 }
 
 
 extension LoginViewController {
     
+    func loginFailure() {
+        let alert = UIAlertController(title: "Login Failed", message: "Do you want to try again as the e-mail or password entered is incorrect.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true)
+        
+    }
+    
     func getUserInfo(){
         UdacityClient.sharedInstance().getPublicUserData { [unowned self] (data, error) in
             if let error = error {
                 print(error)
-            } else {
-                if let data = data {
+              } else {
+              if let data = data {
                     self.completeLogin(data)
-                }
+              }
             }
-      }
-    }
+         }
+     }
 }
 
 
