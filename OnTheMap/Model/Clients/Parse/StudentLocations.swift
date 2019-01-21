@@ -55,7 +55,6 @@ static func userDataFromResults(_ results: [[String:AnyObject]]) -> [StudentInfo
     return student
   }
     
-}
     struct UserInfo {
     static var objectId: String?
     static var uniqueKey: String?
@@ -87,7 +86,7 @@ static func userDataFromResults(_ results: [[String:AnyObject]]) -> [StudentInfo
         return student
     }
 
-   
+  }
 }
     
 

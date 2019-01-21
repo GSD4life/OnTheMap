@@ -213,10 +213,23 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func postingALocation(_ sender: Any) {
-        postingLocation()
+        isClientOnTheMap()
         navigationController?.popToRootViewController(animated: true)
     }
     
+    func submissionFailure() {
+        let ac = UIAlertController(title: "submission failure", message: "please try again", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "try again", style: .default, handler: nil))
+        self.present(ac, animated: true, completion: nil)
+    }
+    
+    func isClientOnTheMap() {
+        if StudentInformation.UserInfo.objectId?.isEmpty ?? true {
+          postingLocation()
+        } else {
+          puttingANewLocation()
+        }
+    }
     
     func postingLocation() {
         ParseClient.sharedInstance().postingStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: lat ?? 0.0, longitude: long ?? 0.0) { (data, error) in
@@ -275,7 +288,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     
     
     func puttingANewLocation() {
-        ParseClient.sharedInstance().puttingAStudentLocation { (studentData, error) in
+        ParseClient.sharedInstance().puttingAStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: lat ?? 0.0, longitude: long ?? 0.0) { (studentData, error) in
             if let studentData = studentData {
                 print(studentData)
             } else {

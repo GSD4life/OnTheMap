@@ -24,6 +24,14 @@ extension ParseClient {
                 
                 if let results = results?[ParseClient.UsersLocation.studentsLocationResults] as? [[String:AnyObject]] {
                     
+                    for (_, objectId) in results.enumerated() {
+                        guard let objectId = objectId["objectId"] as? String else {
+                        print("Could not find objectId")
+                        return
+                        }
+                        StudentInformation.UserInfo.objectId = objectId
+                    }
+                    
                     let result = StudentInformation.userDataFromResults(results)
                     completionHandlerForStudents(result, nil)
                 } else {
@@ -74,8 +82,12 @@ extension ParseClient {
             if let error = error {
                 completionHandlerForPostingLocation(nil, error)
             } else {
-                if let results = results?[JSONResponseKeys.objectId] as? String {
-                    //let studentObjectId = results
+                if let results = results {
+                    guard let objectId = results["objectId"] as? String else {
+                        print("Could not find objectId")
+                        return
+                    }
+                    StudentInformation.UserInfo.objectId = objectId
                     completionHandlerForPostingLocation(results, nil)
                 } else {
                     completionHandlerForPostingLocation(nil, NSError(domain: "postingStudentLocation", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse postingStudentLocation"]))
@@ -85,10 +97,10 @@ extension ParseClient {
     }
     
     // Mark: Function used allow a user to put a new location to the server.
-    func puttingAStudentLocation(_ completionHandlerForPuttingLocation: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
+    func puttingAStudentLocation(mapString: String, mediaURL: String, latitude: Double, longitude: Double, _ completionHandlerForPuttingLocation: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
         
-        let _ = taskForPuttingALocation { (results, error) in
-            
+        let _ = taskForPuttingALocation(id: StudentInformation.UserInfo.objectId ?? "", mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude) { (results, error) in
+            print(self.objectId ?? "")
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
                 completionHandlerForPuttingLocation(nil, error)

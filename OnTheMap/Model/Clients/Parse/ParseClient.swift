@@ -15,7 +15,7 @@ class ParseClient: NSObject {
     var mediaURL = ""
     var longitude: Double = 0.0
     var latitiude: Double = 0.0
-    
+    var objectId: String? = ""
     
     // Mark: Network code used to get student(s) information
     func taskForGet(completionHandlerToGetData: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask{
@@ -164,10 +164,11 @@ class ParseClient: NSObject {
     }
     
     // Mark: Network code used so a student can update and/or put a new location on the map
-    func taskForPuttingALocation(completionHandlerForPutting: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    func taskForPuttingALocation(id: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, completionHandlerForPutting: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
-        let json = "{\"uniqueKey\": \"\(Constants.UniqueKeyValue)\", \"firstName\": \"\(JSONBodyKeys.firstName)\", \"lastName\": \"\(JSONBodyKeys.lastName)\",\"mapString\": \"\(JSONBodyKeys.mapString)\", \"mediaURL\": \"\(JSONBodyKeys.mediaURL)\",\"latitude\": \(JSONBodyKeys.latitude), \"longitude\": \(JSONBodyKeys.longitude)}"
-        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation/XRMN9cf016")!)
+        //var objectID teststring = XRMN9cf016
+        let json = "{\"uniqueKey\": \"\(UdacityClient.sharedInstance().userKey)\", \"firstName\": \"\(UdacityClient.sharedInstance().firstName)\", \"lastName\": \"\(UdacityClient.sharedInstance().lastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}"
+        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation/\(StudentInformation.UserInfo.objectId ?? "")")!)
         request.httpMethod = "PUT"
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
