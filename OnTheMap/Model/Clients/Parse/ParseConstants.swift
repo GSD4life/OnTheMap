@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 
+
 extension ParseClient {
 
 
@@ -32,7 +33,7 @@ struct UsersLocation {
     
     struct JSONBodyKeys {
         static var objectId = JSONResponseKeys.objectId
-        static var uniqueKey = Constants.UniqueKeyValue
+        static var uniqueKey = Constants.uniqueKeyValue
         static var firstName = JSONResponseKeys.firstName
         static var lastName = JSONResponseKeys.lastName
         static var mapString = JSONResponseKeys.mapString
@@ -51,9 +52,9 @@ struct Constants {
     static let scheme = "https"
     static let host = "parse.udacity.com"
     static let path = "/parse/classes/StudentLocation"
-    static let UniqueKeyValue = "1234"
+    static let uniqueKeyValue = UdacityClient.sharedInstance().userKey
 //    11138462743 - actual user key
-    static let queryValues = "{\"uniqueKey\": \"1234\"}"
+    static let queryValues = "{\"uniqueKey\": \"\(uniqueKeyValue)\"}"
 }
     
     

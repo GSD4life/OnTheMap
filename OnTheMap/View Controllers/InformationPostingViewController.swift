@@ -238,6 +238,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             } else {
                 if let data = data {
                     print(data)
+                    self.singleStudentLocation()
                 }
             }
         }
@@ -291,6 +292,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         ParseClient.sharedInstance().puttingAStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: lat ?? 0.0, longitude: long ?? 0.0) { (studentData, error) in
             if let studentData = studentData {
                 print(studentData)
+                self.singleStudentLocation()
             } else {
                 if let error = error {
                     print(error)
@@ -328,8 +330,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             pinView!.pinTintColor = .red
             pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
 
-        }
-        else {
+        } else {
             pinView!.annotation = annotation
         }
 

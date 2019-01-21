@@ -24,13 +24,6 @@ extension ParseClient {
                 
                 if let results = results?[ParseClient.UsersLocation.studentsLocationResults] as? [[String:AnyObject]] {
                     
-                    for (_, objectId) in results.enumerated() {
-                        guard let objectId = objectId["objectId"] as? String else {
-                        print("Could not find objectId")
-                        return
-                        }
-                        StudentInformation.UserInfo.objectId = objectId
-                    }
                     
                     let result = StudentInformation.userDataFromResults(results)
                     completionHandlerForStudents(result, nil)
@@ -55,13 +48,13 @@ extension ParseClient {
                 
                  if let results = results?[ParseClient.UsersLocation.studentsLocationResults] as? [[String:AnyObject]] {
                     
-                    /*Code below gets the object id out of the array of dicitionaries titled results
-                    for (_, studentDictionary) in results.enumerated() {
-                        guard let individualObjectId = studentDictionary["objectId"] as? String else {return}
-                        let studentObjectId = individualObjectId
-                        print(studentObjectId)
-                        
-                    }*/
+                    for (_, objectId) in results.enumerated() {
+                        guard let objectId = objectId["objectId"] as? String else {
+                            print("Could not find objectId")
+                            return
+                        }
+                        StudentInformation.UserInfo.objectId = objectId
+                    }
                     
                    let result = StudentInformation.userDataFromResults(results)
                     completionHandlerForOneStudent(result, nil)
@@ -100,7 +93,7 @@ extension ParseClient {
     func puttingAStudentLocation(mapString: String, mediaURL: String, latitude: Double, longitude: Double, _ completionHandlerForPuttingLocation: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
         
         let _ = taskForPuttingALocation(id: StudentInformation.UserInfo.objectId ?? "", mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude) { (results, error) in
-            print(self.objectId ?? "")
+            
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
                 completionHandlerForPuttingLocation(nil, error)
