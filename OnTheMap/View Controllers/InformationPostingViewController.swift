@@ -155,8 +155,8 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
                 
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = coordinate
-                annotation.title = locationTextField.text
-                annotation.subtitle = URLTextField.text
+                annotation.title = locationTextField.text ?? ""
+                annotation.subtitle = URLTextField.text ?? ""
                 self.mapView.addAnnotation(annotation)
             }
             
@@ -238,10 +238,10 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             } else {
                 if let data = data {
                     print(data)
-                    self.singleStudentLocation()
                 }
             }
         }
+        singleStudentLocation()
     }
     
     
@@ -292,14 +292,13 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         ParseClient.sharedInstance().puttingAStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: lat ?? 0.0, longitude: long ?? 0.0) { (studentData, error) in
             if let studentData = studentData {
                 print(studentData)
-                self.singleStudentLocation()
             } else {
                 if let error = error {
                     print(error)
             }
         }
     }
-  
+        singleStudentLocation()
 }
     
     
@@ -318,7 +317,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     // method in TableViewDataSource
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        //print("delegate one reached")
+        print("delegate one reached")
         let reuseId = "pin"
 
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
@@ -341,7 +340,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     // This delegate method is implemented to respond to taps. It opens the system browser
     // to the URL specified in the annotationViews subtitle property.
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        //print("delegate two reached")
+        print("delegate two reached")
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
