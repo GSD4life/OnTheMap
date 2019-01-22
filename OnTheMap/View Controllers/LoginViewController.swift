@@ -76,7 +76,7 @@ class LoginViewController: UIViewController {
         userDidTapView(self)
         
         if  emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
-            debugTextLabel.text = "Please enter your email and password."
+            debugTextLabel.text = "Enter your email and password."
         } else {
             setUIEnabled(false)
             UdacityClient.sharedInstance().authenticateUser(email: emailTextField.text!, password: passwordTextField.text!) { [unowned self] (result, error) in
