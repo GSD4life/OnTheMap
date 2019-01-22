@@ -223,50 +223,6 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    
-//    func singleStudentLocation () {
-//        ParseClient.sharedInstance().getLocationForOneStudent { (studentData, error) in
-//
-//            if let studentData = studentData {
-//                self.studentData = studentData
-//
-//                var mapAnnotations = [MKPointAnnotation]()
-//
-//                performUIUpdatesOnMain {
-//                    for students in self.studentData {
-//
-//                        let lat = CLLocationDegrees(students.latitude!)
-//                        let long = CLLocationDegrees(students.longitude!)
-//
-//                        // The lat and long are used to create a CLLocationCoordinates2D instance.
-//                        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-//
-//                        //let first = students["firstName"] as! String
-//                        guard let first = students.firstName else {return}
-//                        guard let last = students.lastName else {return}
-//                        guard let mediaURL = students.mediaURL else {return}
-//
-//                        // Here we create the annotation and set its coordinate, title, and subtitle properties
-//                        let mapAnnotation = MKPointAnnotation()
-//                        mapAnnotation.coordinate = coordinate
-//                        mapAnnotation.title = "\(first) \(last)"
-//                        mapAnnotation.subtitle = mediaURL
-//
-//                        print(String(describing:mapAnnotation.title ?? ""))
-//                        // Finally we place the annotation in an array of annotations.
-//                        mapAnnotations.append(mapAnnotation)
-//
-//                    }
-//                    // When the array is complete, we add the annotations to the map.
-//                    self.mapView.addAnnotations(mapAnnotations)
-//
-//                }
-//            }
-//        }
-//    }
-    
-    
-    
     func puttingANewLocation() {
         ParseClient.sharedInstance().puttingAStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: latitude ?? 0.0, longitude: longitude ?? 0.0) { (studentData, error) in
             if let studentData = studentData {
@@ -296,7 +252,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     // method in TableViewDataSource
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        print("delegate one reached")
+        //print("delegate one reached")
         let reuseId = "pin"
 
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
@@ -319,7 +275,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     // This delegate method is implemented to respond to taps. It opens the system browser
     // to the URL specified in the annotationViews subtitle property.
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        print("delegate two reached")
+        //print("delegate two reached")
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
@@ -331,4 +287,4 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
 }
 
 // Sources:
-// Udacity IOS program (Network Requests & GCD), Udacity forums, mentors, apple, cocoacasts, raywenderlich.com).
+// Udacity IOS program (Network Requests & GCD), Udacity forums, and mentors

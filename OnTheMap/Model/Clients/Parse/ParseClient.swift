@@ -257,4 +257,4 @@ class ParseClient: NSObject {
 }
 
 // Sources:
-// Udacity IOS program (Network Requests & GCD), Udacity forums, mentors, apple, cocoacasts, raywenderlich.com).
+// Udacity IOS program (Network Requests & GCD), Udacity forums, and mentors

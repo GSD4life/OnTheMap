@@ -92,6 +92,6 @@ static func userDataFromResults(_ results: [[String:AnyObject]]) -> [StudentInfo
 
 
 // Sources:
-// Udacity IOS program (Network Requests & GCD), Udacity forums, mentors, apple, cocoacasts, raywenderlich.com).
+// Udacity IOS program (Network Requests & GCD), Udacity forums, and mentors
 
    
