@@ -13,8 +13,8 @@ import MapKit
 class InformationPostingViewController: UIViewController, MKMapViewDelegate {
 
     var studentData: [StudentInformation] = [StudentInformation]()
-    var lat: Double? = 0.0
-    var long: Double? = 0.0
+    var latitude: Double? = 0.0
+    var longitude: Double? = 0.0
     
     
     @IBOutlet weak var locationTextField: UITextField!
@@ -50,39 +50,6 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
      addingViewsToLayout()
 
     }
-    
-    /*func createLocationManager() {
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    }*/
-    
-    /*func allowLocationServices(){
-        
-        switch CLLocationManager.authorizationStatus() {
-        
-        case .notDetermined:
-            // Request when-in-use authorization initially
-            locationManager.requestWhenInUseAuthorization()
-            break
-            
-        case .restricted, .denied:
-            // Disable location features
-            allowLocationServices()
-            break
-            
-        case .authorizedWhenInUse, .authorizedAlways:
-             assert(CLAuthorizationStatus.authorizedWhenInUse == .authorizedWhenInUse, "Location services is not authorized for when in use")
-             assert(CLAuthorizationStatus.authorizedAlways == .authorizedAlways, "Location services is not set to always authorized")
-            break
-            
-        default:
-            return
-        
-        }
-        
-    }*/
     
     
     func addingViewsToLayout() {
@@ -162,8 +129,8 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             
             if let location = location {
                 let coordinate = location.coordinate
-                lat = coordinate.latitude
-                long = coordinate.longitude
+                latitude = coordinate.latitude
+                longitude = coordinate.longitude
                 print("The coordinates are Lat: \(coordinate.latitude) and Long: \(coordinate.longitude)"
                     
             )}
@@ -232,7 +199,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     }
     
     func postingLocation() {
-        ParseClient.sharedInstance().postingStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: lat ?? 0.0, longitude: long ?? 0.0) { (data, error) in
+        ParseClient.sharedInstance().postingStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: latitude ?? 0.0, longitude: longitude ?? 0.0) { (data, error) in
             if let error = error {
                 print(error)
             } else {
@@ -241,55 +208,67 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
                 }
             }
         }
-        singleStudentLocation()
+         uniqueUserPostedInfo()
     }
     
-    
-    func singleStudentLocation () {
+    func uniqueUserPostedInfo() {
         ParseClient.sharedInstance().getLocationForOneStudent { (studentData, error) in
-        
             if let studentData = studentData {
-                self.studentData = studentData
-                
-                var mapAnnotations = [MKPointAnnotation]()
-                
-                performUIUpdatesOnMain {
-                    for students in self.studentData {
-                        
-                        let lat = CLLocationDegrees(students.latitude!)
-                        let long = CLLocationDegrees(students.longitude!)
-                        
-                        // The lat and long are used to create a CLLocationCoordinates2D instance.
-                        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                        
-                        //let first = students["firstName"] as! String
-                        guard let first = students.firstName else {return}
-                        guard let last = students.lastName else {return}
-                        guard let mediaURL = students.mediaURL else {return}
-                        
-                        // Here we create the annotation and set its coordinate, title, and subtitle properties
-                        let mapAnnotation = MKPointAnnotation()
-                        mapAnnotation.coordinate = coordinate
-                        mapAnnotation.title = "\(first) \(last)"
-                        mapAnnotation.subtitle = mediaURL
-                        
-                        print(String(describing:mapAnnotation.title ?? ""))
-                        // Finally we place the annotation in an array of annotations.
-                        mapAnnotations.append(mapAnnotation)
-                        
-                    }
-                    // When the array is complete, we add the annotations to the map.
-                    self.mapView.addAnnotations(mapAnnotations)
-                    
-                }
+                 print(studentData)
+              } else {
+                 if let error = error {
+                 print(error)
+              }
             }
         }
     }
     
     
+//    func singleStudentLocation () {
+//        ParseClient.sharedInstance().getLocationForOneStudent { (studentData, error) in
+//
+//            if let studentData = studentData {
+//                self.studentData = studentData
+//
+//                var mapAnnotations = [MKPointAnnotation]()
+//
+//                performUIUpdatesOnMain {
+//                    for students in self.studentData {
+//
+//                        let lat = CLLocationDegrees(students.latitude!)
+//                        let long = CLLocationDegrees(students.longitude!)
+//
+//                        // The lat and long are used to create a CLLocationCoordinates2D instance.
+//                        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+//
+//                        //let first = students["firstName"] as! String
+//                        guard let first = students.firstName else {return}
+//                        guard let last = students.lastName else {return}
+//                        guard let mediaURL = students.mediaURL else {return}
+//
+//                        // Here we create the annotation and set its coordinate, title, and subtitle properties
+//                        let mapAnnotation = MKPointAnnotation()
+//                        mapAnnotation.coordinate = coordinate
+//                        mapAnnotation.title = "\(first) \(last)"
+//                        mapAnnotation.subtitle = mediaURL
+//
+//                        print(String(describing:mapAnnotation.title ?? ""))
+//                        // Finally we place the annotation in an array of annotations.
+//                        mapAnnotations.append(mapAnnotation)
+//
+//                    }
+//                    // When the array is complete, we add the annotations to the map.
+//                    self.mapView.addAnnotations(mapAnnotations)
+//
+//                }
+//            }
+//        }
+//    }
+    
+    
     
     func puttingANewLocation() {
-        ParseClient.sharedInstance().puttingAStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: lat ?? 0.0, longitude: long ?? 0.0) { (studentData, error) in
+        ParseClient.sharedInstance().puttingAStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: latitude ?? 0.0, longitude: longitude ?? 0.0) { (studentData, error) in
             if let studentData = studentData {
                 print(studentData)
             } else {
@@ -298,7 +277,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-        singleStudentLocation()
+        uniqueUserPostedInfo()
 }
     
     
