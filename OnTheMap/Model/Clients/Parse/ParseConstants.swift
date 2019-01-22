@@ -53,7 +53,7 @@ struct Constants {
     static let host = "parse.udacity.com"
     static let path = "/parse/classes/StudentLocation"
     static let uniqueKeyValue = UdacityClient.sharedInstance().userKey
-//    11138462743 - actual user key
+
     static let queryValues = "{\"uniqueKey\": \"\(uniqueKeyValue)\"}"
 }
     
