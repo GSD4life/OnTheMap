@@ -11,7 +11,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    var keyboardOnScreen = false
+    var keyboardOnScreen = true
     var appDelegate: AppDelegate!
     var userKey = ""
     var student = [StudentInformation]()
@@ -138,15 +138,16 @@ extension LoginViewController: UITextFieldDelegate {
     // Mark: Show/Hide Keyboard
     
     @objc func keyboardWillShow(_ notification: Notification) {
-        if !keyboardOnScreen {
+        if keyboardOnScreen {
             //view.frame.origin.y -= keyboardHeight(notification)
-            udacityImageView.isHidden = true
+            //udacityImageView.isHidden = true
         }
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        if keyboardOnScreen {
-            view.frame.origin.y += keyboardHeight(notification)
+        if !keyboardOnScreen {
+            view.frame.origin.y = 0
+            //view.frame.origin.y += keyboardHeight(notification)
             udacityImageView.isHidden = false
         }
     }
