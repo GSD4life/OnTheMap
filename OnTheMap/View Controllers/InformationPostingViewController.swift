@@ -131,9 +131,9 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
                 let coordinate = location.coordinate
                 latitude = coordinate.latitude
                 longitude = coordinate.longitude
-                print("The coordinates are Lat: \(coordinate.latitude) and Long: \(coordinate.longitude)"
+                //print("The coordinates are Lat: \(coordinate.latitude) and Long: \(coordinate.longitude)")
                     
-            )}
+            }
             
         }
     
@@ -229,7 +229,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
                 print(studentData)
             } else {
                 if let error = error {
-                    print(error)
+                print(error)
             }
         }
     }

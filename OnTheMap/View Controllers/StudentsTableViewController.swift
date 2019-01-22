@@ -24,14 +24,16 @@ class StudentsTableViewController: UITableViewController {
     }
     
     func getTableInfo() {
-        ParseClient.sharedInstance().getStudentsLocation{ (studentData, error) in
+        ParseClient.sharedInstance().getStudentsLocation{ [unowned self] (studentData, error) in
             if let studentData = studentData {
                 self.studentData = studentData
                 performUIUpdatesOnMain {
                     self.mapsTableView.reloadData()
                 }
             } else {
-                print(error ?? "empty error")
+                if let error = error {
+                    print(error)
+                }
             }
         }
     }
