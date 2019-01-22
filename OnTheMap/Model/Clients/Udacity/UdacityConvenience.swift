@@ -36,11 +36,11 @@ extension UdacityClient {
       
         let _ = getUserData(key: self.userKey) { [unowned self] (results, error) in
         
-        print(self.userKey)
+        //print(self.userKey)
         if let error = error {
             
-             assert(error == error, "assert error message")
-             completionHandlerForUserData(nil, NSError(domain: "getPublicUserData parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse get Pulic User  location data"]))
+             completionHandlerForUserData(nil, error)
+            
         } else {
             if let results = results {
                 guard let firstName = results["first_name"] as? String else {return}
@@ -48,25 +48,20 @@ extension UdacityClient {
                 self.firstName = firstName
                 self.lastName = LastName
                 
-                let loggedInUser = UdacityUser(userKey: self.userKey, firstName: self.firstName, lastName: self.lastName)
-                print(loggedInUser)
-
-            }
-                /* Using the "user" key does not work as map does not populate and app stalls at login page. The user key stopped working on 11/28/18 when udacity began updating their URLs for getting public user data and login. No information provided by support. */
-//                let firstName = results["first_name"] as? String ?? "Ich"
-//                self.firstName = firstName
-//                let lastName = results["last_name"] as? String ?? "Ni"
-//                self.lastName = lastName
-//                print(firstName, lastName, terminator: "")
-             completionHandlerForUserData(results, nil)
+                let _ = UdacityUser(userKey: self.userKey, firstName: self.firstName, lastName: self.lastName)
                 
+                completionHandlerForUserData(results, nil)
+
+            } else {
+              
+                completionHandlerForUserData(nil, NSError(domain: "getPublicUserData parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse get Pulic User  location data"]))
+            
             }
         }
-    }
+     }
+  }
+
+
 }
-    
-    
-
-
 // Sources:
 // Udacity IOS program (Network Requests & GCD), Udacity forums, and mentors
