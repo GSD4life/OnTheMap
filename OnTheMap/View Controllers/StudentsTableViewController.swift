@@ -32,17 +32,19 @@ class StudentsTableViewController: UITableViewController {
                 }
             } else {
                 if let error = error {
-                    print(error)
+                    self.alert(error: error)
                 }
             }
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func alert(error: NSError) {
+        let ac = UIAlertController(title: "The error is: \(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            present(ac, animated: true, completion: nil)
     }
-
+    
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
