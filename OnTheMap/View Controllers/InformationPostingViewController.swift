@@ -144,16 +144,9 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         let ac = UIAlertController(title: "Missing a location and/or a valid URL address", message: "Please enter a valid URL using https:// and a location", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         self.present(ac, animated: true, completion: nil)
+        
     }
     
-    func locationServicesAlert() {
-      let ac = UIAlertController(title: "Location Service Issues", message: "Please enable location services", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        self.present(ac, animated: true, completion: nil)
-    }
-    
-    
-
     
     func navigationButtons () {
         navigationItem.title = "Add Location"
@@ -171,18 +164,21 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func findLocation(_ sender: Any) {
+        if locationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true || URLTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+            alertMessage()
+        } else {
         
         activityIndicator.startAnimating()
         forwardGeocodeAddress()
         visibleViewsForMap()
         finishButton.isHidden = false
         topAndMiddleViewHidden()
-        
+      }
         
     }
     
     @IBAction func postingALocation(_ sender: Any) {
-        missingInfo()
+       
         isClientOnTheMap()
         navigationController?.popToRootViewController(animated: true)
     }
@@ -197,8 +193,8 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     
     func postingLocation() {
         ParseClient.sharedInstance().postingStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: latitude ?? 0.0, longitude: longitude ?? 0.0) { [unowned self] (data, error) in
-            if let _ = error {
-              self.postingALocationFailure()
+            if let error = error {
+              self.postingALocationFailure(error)
             } else {
                 if let data = data {
                     print(data)
@@ -225,24 +221,26 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             if let studentData = studentData {
                 print(studentData)
             } else {
-                if let _ = error {
-               self.puttingAlocationFailure()
+                if let error = error {
+                    self.puttingAlocationFailure(error)
             }
         }
     }
         uniqueUserPostedInfo()
 }
     
-    func puttingAlocationFailure() {
-        let ac = UIAlertController(title: "There is a problem updating your existing location", message: "The request failed", preferredStyle: .alert)
+    func puttingAlocationFailure(_ error: NSError) {
+        let ac = UIAlertController(title: "The error is: \(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         present(ac, animated: true, completion: nil)
+        
     }
     
-    func postingALocationFailure(){
-        let ac = UIAlertController(title: "There is a problem posting your location to the map", message: "The request failed", preferredStyle: .alert)
+    func postingALocationFailure(_ error: NSError){
+        let ac = UIAlertController(title: "The error is: \(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         present(ac, animated: true, completion: nil)
+        
     }
 
     @objc func cancel() {
