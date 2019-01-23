@@ -31,6 +31,10 @@ override func viewWillAppear(_ animated: Bool) {
     
         
         ParseClient.sharedInstance().getStudentsLocation() { [unowned self] (uniqueData, error) in
+            if let error = error {
+                self.alertIssueForMap(error: error)
+            } else {
+            
             if let uniqueData = uniqueData {
                 self.uniqueData = uniqueData
                 
@@ -71,6 +75,16 @@ override func viewWillAppear(_ animated: Bool) {
             }
         }
     }
+    
+}
+    func alertIssueForMap(error: NSError) {
+        
+        let ac = UIAlertController(title: "The error is: \(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        present(ac, animated: true, completion: nil)
+        
+    }
+    
 // Mark: - MKMapViewDelegate
 
 // Here we create a view with a "right callout accessory view". You might choose to look into other

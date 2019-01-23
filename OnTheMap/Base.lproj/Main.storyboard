@@ -31,7 +31,7 @@
                                 <rect key="frame" x="90" y="178" width="168" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rPh-c8-yNb">
                                 <rect key="frame" x="65" y="254" width="219" height="30"/>
@@ -274,9 +274,8 @@
                                     <constraint firstItem="3Ke-qR-8wa" firstAttribute="leading" secondItem="KfP-2b-jrZ" secondAttribute="leading" id="XoZ-7G-ane"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYB-uU-Bff">
-                                <rect key="frame" x="22" y="476" width="242" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYB-uU-Bff">
+                                <rect key="frame" x="22" y="476" width="243" height="30"/>
                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Finish">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -294,8 +293,11 @@
                             <constraint firstItem="AGS-Ce-iy8" firstAttribute="bottom" secondItem="KfP-2b-jrZ" secondAttribute="bottom" constant="121" id="GBt-LD-4nQ"/>
                             <constraint firstItem="AGS-Ce-iy8" firstAttribute="trailing" secondItem="Ecx-0k-0TZ" secondAttribute="trailing" id="Gfx-xu-CDz"/>
                             <constraint firstItem="Ecx-0k-0TZ" firstAttribute="top" secondItem="RSa-KW-0SX" secondAttribute="bottom" constant="-191" id="Jjs-WA-g3y"/>
+                            <constraint firstItem="XYB-uU-Bff" firstAttribute="centerX" secondItem="UyB-wJ-FRt" secondAttribute="centerX" id="LfD-1V-HUM"/>
                             <constraint firstItem="KfP-2b-jrZ" firstAttribute="trailing" secondItem="a8i-RP-8ZG" secondAttribute="trailingMargin" id="NIg-Bu-B3H"/>
+                            <constraint firstItem="XYB-uU-Bff" firstAttribute="top" secondItem="KfP-2b-jrZ" secondAttribute="bottom" constant="29" id="Q8a-u0-Yim"/>
                             <constraint firstItem="AGS-Ce-iy8" firstAttribute="bottom" secondItem="Ecx-0k-0TZ" secondAttribute="bottom" id="Ray-Ah-3uX"/>
+                            <constraint firstItem="XYB-uU-Bff" firstAttribute="leading" secondItem="AGS-Ce-iy8" secondAttribute="leading" constant="22" id="Vjv-gX-mjp"/>
                             <constraint firstItem="UyB-wJ-FRt" firstAttribute="leading" secondItem="KfP-2b-jrZ" secondAttribute="leading" id="X6L-77-fhC"/>
                             <constraint firstItem="RSa-KW-0SX" firstAttribute="leading" secondItem="AGS-Ce-iy8" secondAttribute="leading" constant="16" id="ZAk-Ce-Cot"/>
                             <constraint firstItem="AGS-Ce-iy8" firstAttribute="trailing" secondItem="UyB-wJ-FRt" secondAttribute="trailing" constant="49" id="esL-rf-rbd"/>
