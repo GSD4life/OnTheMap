@@ -11,7 +11,7 @@ import UIKit
 
 extension UdacityClient {
     
-    func authenticateUser(email: String, password: String, CompletionHandlerToAuthenticate: @escaping (_ result: Any?, _ error: Error?) -> Void) {
+    func authenticateUser(email: String, password: String, CompletionHandlerToAuthenticate: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
         
         
         login(email: email, password: password) { [unowned self] (result, error) in
