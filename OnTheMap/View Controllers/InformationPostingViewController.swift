@@ -87,8 +87,9 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         let address = "\(location)"
         geocoder.geocodeAddressString(address) { (placemarks, error) in
             // Process Response
-            self.processResponse(withPlacemarks: placemarks, error: error)
             guard let placemark = placemarks else {return}
+            self.processResponse(withPlacemarks: placemarks, error: error)
+            
             print(placemark)
         }
            findLocationButton.isHidden = true
@@ -171,23 +172,19 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func findLocation(_ sender: Any) {
         
+        activityIndicator.startAnimating()
         forwardGeocodeAddress()
         visibleViewsForMap()
         finishButton.isHidden = false
         topAndMiddleViewHidden()
-        activityIndicator.startAnimating()
+        
         
     }
     
     @IBAction func postingALocation(_ sender: Any) {
+        missingInfo()
         isClientOnTheMap()
         navigationController?.popToRootViewController(animated: true)
-    }
-    
-    func submissionFailure() {
-        let ac = UIAlertController(title: "submission failure", message: "please try again", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "try again", style: .default, handler: nil))
-        self.present(ac, animated: true, completion: nil)
     }
     
     func isClientOnTheMap() {
@@ -199,9 +196,9 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     }
     
     func postingLocation() {
-        ParseClient.sharedInstance().postingStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: latitude ?? 0.0, longitude: longitude ?? 0.0) { (data, error) in
-            if let error = error {
-                print(error)
+        ParseClient.sharedInstance().postingStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: latitude ?? 0.0, longitude: longitude ?? 0.0) { [unowned self] (data, error) in
+            if let _ = error {
+              self.postingALocationFailure()
             } else {
                 if let data = data {
                     print(data)
@@ -224,19 +221,29 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     }
     
     func puttingANewLocation() {
-        ParseClient.sharedInstance().puttingAStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: latitude ?? 0.0, longitude: longitude ?? 0.0) { (studentData, error) in
+        ParseClient.sharedInstance().puttingAStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: latitude ?? 0.0, longitude: longitude ?? 0.0) { [unowned self] (studentData, error) in
             if let studentData = studentData {
                 print(studentData)
             } else {
-                if let error = error {
-                print(error)
+                if let _ = error {
+               self.puttingAlocationFailure()
             }
         }
     }
         uniqueUserPostedInfo()
 }
     
+    func puttingAlocationFailure() {
+        let ac = UIAlertController(title: "There is a problem updating your existing location", message: "The request failed", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        present(ac, animated: true, completion: nil)
+    }
     
+    func postingALocationFailure(){
+        let ac = UIAlertController(title: "There is a problem posting your location to the map", message: "The request failed", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        present(ac, animated: true, completion: nil)
+    }
 
     @objc func cancel() {
         self.navigationController?.popToRootViewController(animated: true)
