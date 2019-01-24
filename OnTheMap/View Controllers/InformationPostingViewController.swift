@@ -164,7 +164,10 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func findLocation(_ sender: Any) {
-        if locationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true || URLTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
+        guard URLTextField.text?.hasPrefix("https://") ?? false else {
+            alertMessage()
+            return}
+        if locationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true || URLTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true  {
             alertMessage()
         } else {
         
@@ -230,14 +233,14 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
 }
     
     func puttingAlocationFailure(_ error: NSError) {
-        let ac = UIAlertController(title: "The error is: \(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
+        let ac = UIAlertController(title: "\(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         present(ac, animated: true, completion: nil)
         
     }
     
     func postingALocationFailure(_ error: NSError){
-        let ac = UIAlertController(title: "The error is: \(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
+        let ac = UIAlertController(title: "\(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         present(ac, animated: true, completion: nil)
         

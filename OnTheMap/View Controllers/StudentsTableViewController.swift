@@ -39,7 +39,7 @@ class StudentsTableViewController: UITableViewController {
     }
     
     func alert(error: NSError) {
-        let ac = UIAlertController(title: "The error is: \(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
+        let ac = UIAlertController(title: "\(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
             present(ac, animated: true, completion: nil)
     }
