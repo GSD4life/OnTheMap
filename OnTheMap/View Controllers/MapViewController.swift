@@ -15,8 +15,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    //var uniqueData: [StudentInformation] = [StudentInformation]()
-    
         
 override func viewDidLoad() {
     super.viewDidLoad()
