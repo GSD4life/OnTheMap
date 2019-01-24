@@ -14,7 +14,7 @@ class LoginViewController: UIViewController {
     var keyboardOnScreen = true
     var appDelegate: AppDelegate!
     var userKey = ""
-    var student = [StudentInformation]()
+    
     
     // Mark: Outlets
     

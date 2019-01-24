@@ -12,7 +12,6 @@ import MapKit
 
 class InformationPostingViewController: UIViewController, MKMapViewDelegate {
 
-    var studentData: [StudentInformation] = [StudentInformation]()
     var latitude: Double? = 0.0
     var longitude: Double? = 0.0
     

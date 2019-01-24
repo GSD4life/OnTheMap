@@ -10,7 +10,7 @@ import UIKit
 
 class StudentsTableViewController: UITableViewController {
     
-    var studentData = [StudentInformation]()
+ 
 
     @IBOutlet weak var mapsTableView: UITableView!
     
@@ -26,7 +26,7 @@ class StudentsTableViewController: UITableViewController {
     func getTableInfo() {
         ParseClient.sharedInstance().getStudentsLocation{ [unowned self] (studentData, error) in
             if let studentData = studentData {
-                self.studentData = studentData
+                StudentArrayDataSource.sharedInstance.arrayOfStudentInfo = studentData
                 performUIUpdatesOnMain {
                     self.mapsTableView.reloadData()
                 }
@@ -49,13 +49,13 @@ class StudentsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return studentData.count
+        return StudentArrayDataSource.sharedInstance.arrayOfStudentInfo.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PinCell", for: indexPath)
-        let item = self.studentData[indexPath.row]
+        let item = StudentArrayDataSource.sharedInstance.arrayOfStudentInfo[indexPath.row]
         guard let firstName = item.firstName else {return cell}
         guard let lastName = item.lastName else {return cell}
         guard let mediaURL = item.mediaURL else {return cell}
@@ -69,7 +69,7 @@ class StudentsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let web = self.studentData[indexPath.row]
+        let web = StudentArrayDataSource.sharedInstance.arrayOfStudentInfo[indexPath.row]
         guard let webAddress = web.mediaURL else {return}
         let app = UIApplication.shared
         app.open(URL(string: webAddress)!)
