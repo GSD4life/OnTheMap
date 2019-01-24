@@ -15,7 +15,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    var uniqueData: [StudentInformation] = [StudentInformation]()
+    //var uniqueData: [StudentInformation] = [StudentInformation]()
     
         
 override func viewDidLoad() {
@@ -36,7 +36,7 @@ override func viewWillAppear(_ animated: Bool) {
             } else {
             
             if let uniqueData = uniqueData {
-                self.uniqueData = uniqueData
+                StudentArrayDataSource.sharedInstance.arrayOfStudentInfo = uniqueData
                 
                 var annotations = [MKPointAnnotation]()
                 
@@ -44,7 +44,7 @@ override func viewWillAppear(_ animated: Bool) {
                 performUIUpdatesOnMain {
                     self.mapView.removeAnnotations(self.mapView.annotations)
                     
-                    for students in self.uniqueData {
+                    for students in StudentArrayDataSource.sharedInstance.arrayOfStudentInfo {
                         
                         let lat = CLLocationDegrees(students.latitude ?? 0)
                         let long = CLLocationDegrees(students.longitude ?? 0)
