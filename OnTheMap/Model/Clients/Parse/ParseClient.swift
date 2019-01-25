@@ -19,13 +19,13 @@ class ParseClient: NSObject {
     
     // Mark: Network code used to get student(s) information
     func taskForGet(completionHandlerToGetData: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask{
-       
-    var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt")!)
+        
+        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt")!)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
-           
+            
             func sendError(_ error: String) {
                 print(error)
                 let userInfo = [NSLocalizedDescriptionKey: error]
@@ -60,7 +60,7 @@ class ParseClient: NSObject {
         task.resume()
         
         return task
-    
+        
     }
     
     // Mark: Network code used to get information for a single student
@@ -108,8 +108,8 @@ class ParseClient: NSObject {
         task.resume()
         
         return task
-    
-    
+        
+        
     }
     
     // Mark: Network code used to post info to API
@@ -135,7 +135,7 @@ class ParseClient: NSObject {
             guard (error == nil) else {
                 sendError("There was an error with your request: \(error!)")
                 return
-            
+                
             }
             
             /* GUARD: Did we get a successful 2XX response? */
@@ -239,21 +239,21 @@ class ParseClient: NSObject {
     // Mark: Helper function to build a URL so all items are properly escaped/allowed.
     private func URLFromParameters(_ parameters: [String:AnyObject]) -> URL {
         
-    var components = URLComponents()
-    components.scheme = ParseClient.Constants.scheme
-    components.host = ParseClient.Constants.host
-    components.path = ParseClient.Constants.path
-    components.queryItems = [URLQueryItem]()
-    
-    
-    for (key, value) in parameters {
-        let queryItem = URLQueryItem(name: key, value: "\(value)")
-        components.queryItems!.append(queryItem)
+        var components = URLComponents()
+        components.scheme = ParseClient.Constants.scheme
+        components.host = ParseClient.Constants.host
+        components.path = ParseClient.Constants.path
+        components.queryItems = [URLQueryItem]()
+        
+        
+        for (key, value) in parameters {
+            let queryItem = URLQueryItem(name: key, value: "\(value)")
+            components.queryItems!.append(queryItem)
+        }
+        
+        return components.url!
     }
     
-    return components.url!
-}
-
 }
 
 // Sources:

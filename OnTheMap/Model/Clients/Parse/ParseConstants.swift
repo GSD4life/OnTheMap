@@ -10,26 +10,26 @@ import MapKit
 
 
 extension ParseClient {
-
-
-struct JSONResponseKeys {
-    static let objectId = "objectId"
-    static let uniqueKey = "uniqueKey"
-    static let firstName = "firstName"
-    static let lastName = "lastName"
-    static let mapString = "mapString"
-    static let mediaURL = "mediaURL"
-    static let latitude = "latitude"
-    static let longitude = "longitude"
-    static let createdAt = "createdAt"
-    static let updatedAt = "updatedAt"
-    static let ACL = "ACL"
-}
     
-
-struct UsersLocation {
-   static let studentsLocationResults = "results"
-}
+    
+    struct JSONResponseKeys {
+        static let objectId = "objectId"
+        static let uniqueKey = "uniqueKey"
+        static let firstName = "firstName"
+        static let lastName = "lastName"
+        static let mapString = "mapString"
+        static let mediaURL = "mediaURL"
+        static let latitude = "latitude"
+        static let longitude = "longitude"
+        static let createdAt = "createdAt"
+        static let updatedAt = "updatedAt"
+        static let ACL = "ACL"
+    }
+    
+    
+    struct UsersLocation {
+        static let studentsLocationResults = "results"
+    }
     
     struct JSONBodyKeys {
         static var objectId = JSONResponseKeys.objectId
@@ -42,23 +42,23 @@ struct UsersLocation {
         static var longitude: Double = 0.00
     }
     
-struct Constants {
+    struct Constants {
+        
+        static let queryName = "where"
+        static let queryLimit = "limit"
+        static let value = "1"
+        static let order = "order"
+        static let updatedAt = "-updatedAt"
+        static let scheme = "https"
+        static let host = "parse.udacity.com"
+        static let path = "/parse/classes/StudentLocation"
+        static let uniqueKeyValue = UdacityClient.sharedInstance().userKey
+        
+        static let queryValues = "{\"uniqueKey\": \"\(uniqueKeyValue)\"}"
+    }
     
-    static let queryName = "where"
-    static let queryLimit = "limit"
-    static let value = "1"
-    static let order = "order"
-    static let updatedAt = "-updatedAt"
-    static let scheme = "https"
-    static let host = "parse.udacity.com"
-    static let path = "/parse/classes/StudentLocation"
-    static let uniqueKeyValue = UdacityClient.sharedInstance().userKey
-
-    static let queryValues = "{\"uniqueKey\": \"\(uniqueKeyValue)\"}"
-}
     
     
-
 }
 
 // Sources:

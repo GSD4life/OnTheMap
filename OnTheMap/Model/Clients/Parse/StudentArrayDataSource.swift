@@ -13,5 +13,5 @@ class StudentArrayDataSource: NSObject {
     static let sharedInstance = StudentArrayDataSource()
     
     var arrayOfStudentInfo = [StudentInformation]()
-
+    
 }

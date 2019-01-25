@@ -11,7 +11,7 @@ import MapKit
 
 
 class InformationPostingViewController: UIViewController, MKMapViewDelegate {
-
+    
     var latitude: Double? = 0.0
     var longitude: Double? = 0.0
     
@@ -31,11 +31,11 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var findLocationButton: UIButton!
     
     var regionRadius: CLLocationDistance = 1000
-    //var locationManager: CLLocationManager!
+    
     
     lazy var geocoder = CLGeocoder()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -45,9 +45,10 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-     showOrHideButtonAndMap()
-     addingViewsToLayout()
-
+        super.viewWillAppear(animated)
+        showOrHideButtonAndMap()
+        addingViewsToLayout()
+        
     }
     
     
@@ -69,11 +70,11 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             mapView.isHidden = true
             finishButton.isHidden = true
         } else {
-          mapView.isHidden = false
-          finishButton.isHidden = false
+            mapView.isHidden = false
+            finishButton.isHidden = false
         }
     }
-
+    
     func missingInfo() {
         if locationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true || URLTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true {
             alertMessage()
@@ -91,7 +92,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             
             print(placemark)
         }
-           findLocationButton.isHidden = true
+        findLocationButton.isHidden = true
     }
     
     
@@ -132,11 +133,11 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
                 latitude = coordinate.latitude
                 longitude = coordinate.longitude
                 //print("The coordinates are Lat: \(coordinate.latitude) and Long: \(coordinate.longitude)")
-                    
+                
             }
             
         }
-    
+        
     }
     
     func alertMessage() {
@@ -158,8 +159,8 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
     }
     
     func visibleViewsForMap() {
-    mapView.isHidden = false
-    bottomView.isHidden = true
+        mapView.isHidden = false
+        bottomView.isHidden = true
     }
     
     @IBAction func findLocation(_ sender: Any) {
@@ -169,51 +170,51 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         if locationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true || URLTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true  {
             alertMessage()
         } else {
-        
-        activityIndicator.startAnimating()
-        forwardGeocodeAddress()
-        visibleViewsForMap()
-        finishButton.isHidden = false
-        topAndMiddleViewHidden()
-      }
+            
+            activityIndicator.startAnimating()
+            forwardGeocodeAddress()
+            visibleViewsForMap()
+            finishButton.isHidden = false
+            topAndMiddleViewHidden()
+        }
         
     }
     
     @IBAction func postingALocation(_ sender: Any) {
-       
+        
         isClientOnTheMap()
         navigationController?.popToRootViewController(animated: true)
     }
     
     func isClientOnTheMap() {
         if StudentInformation.UserInfo.objectId?.isEmpty ?? true {
-          postingLocation()
+            postingLocation()
         } else {
-          puttingANewLocation()
+            puttingANewLocation()
         }
     }
     
     func postingLocation() {
         ParseClient.sharedInstance().postingStudentLocation(mapString: locationTextField.text!, mediaURL: URLTextField.text!, latitude: latitude ?? 0.0, longitude: longitude ?? 0.0) { [unowned self] (data, error) in
             if let error = error {
-              self.postingALocationFailure(error)
+                self.postingALocationFailure(error)
             } else {
                 if let data = data {
                     print(data)
                 }
             }
         }
-         uniqueUserPostedInfo()
+        uniqueUserPostedInfo()
     }
     
     func uniqueUserPostedInfo() {
         ParseClient.sharedInstance().getLocationForOneStudent { (studentData, error) in
             if let studentData = studentData {
-                 print(studentData)
-              } else {
-                 if let error = error {
-                 print(error)
-              }
+                print(studentData)
+            } else {
+                if let error = error {
+                    print(error)
+                }
             }
         }
     }
@@ -225,11 +226,11 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             } else {
                 if let error = error {
                     self.puttingAlocationFailure(error)
+                }
             }
         }
-    }
         uniqueUserPostedInfo()
-}
+    }
     
     func puttingAlocationFailure(_ error: NSError) {
         let ac = UIAlertController(title: "\(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
@@ -244,37 +245,37 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
         present(ac, animated: true, completion: nil)
         
     }
-
+    
     @objc func cancel() {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
-
-
+    
+    
     
     // Mark: - MKMapViewDelegate
     
     // Here we create a view with a "right callout accessory view". You might choose to look into other
     // decoration alternatives. Notice the similarity between this method and the cellForRowAtIndexPath
     // method in TableViewDataSource
-
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         //print("delegate one reached")
         let reuseId = "pin"
-
+        
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-
-
+        
+        
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
             pinView!.pinTintColor = .red
             pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-
+            
         } else {
             pinView!.annotation = annotation
         }
-
+        
         return pinView
     }
     
@@ -290,7 +291,7 @@ class InformationPostingViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-
+    
 }
 
 // Sources:

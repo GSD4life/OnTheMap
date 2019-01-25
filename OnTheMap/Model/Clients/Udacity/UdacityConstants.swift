@@ -9,20 +9,20 @@
 import UIKit
 
 extension UdacityClient {
-
-struct UdacityUser {
-    var userKey: String
-    var firstName: String
-    var lastName: String
-}
     
-
+    struct UdacityUser {
+        var userKey: String
+        var firstName: String
+        var lastName: String
+    }
     
-struct JSONUserKey {
-    static let user = "user"
-
-}
-
+    
+    
+    struct JSONUserKey {
+        static let user = "user"
+        
+    }
+    
 }
 
 // Sources:

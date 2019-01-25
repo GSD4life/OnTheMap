@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var debugTextLabel: UILabel!
     
     
-
+    
     @IBAction func signUpButton(_ sender: Any) {
         let app = UIApplication.shared
         app.open(URL(string: "https://www.udacity.com")!)
@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
         subscribeToNotification(UIResponder.keyboardDidHideNotification, selector: #selector(keyboardDidHide))
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         debugTextLabel.text = ""
@@ -70,40 +70,36 @@ class LoginViewController: UIViewController {
         }
     }
     
-
+    
     @IBAction func loginPressed(_ sender: AnyObject) {
         
         userDidTapView(self)
         
-            setUIEnabled(false)
-            UdacityClient.sharedInstance().authenticateUser(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") { [unowned self] (result, error) in
-                self.setUIEnabled(true)
-                
-                if let error = error {
-                    performUIUpdatesOnMain {
-                        if self.emailTextField.text!.isEmpty  || self.passwordTextField.text!.isEmpty  {
-                            self.loginFailure(error)
-                        }
-                    }
-                    
-                } else {
-
-                    if let _ = result {
-                        self.getUserInfo()
-                    
+        setUIEnabled(false)
+        UdacityClient.sharedInstance().authenticateUser(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") { [unowned self] (result, error) in
+            self.setUIEnabled(true)
             
-               }
-              }
+            if let error = error {
+                self.loginFailure(error)
+                
+            } else {
+                
+                if let _ = result {
+                    self.getUserInfo()
+                    
+                    
+                }
             }
-          }
         }
+    }
+}
 
 
 
 extension LoginViewController {
     
     func loginFailure(_ error: NSError) {
-        let alert = UIAlertController(title: "\(error.localizedDescription)", message: "Do you want to try again as the e-mail or password entered is incorrect.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "\(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
@@ -116,17 +112,17 @@ extension LoginViewController {
         UdacityClient.sharedInstance().getPublicUserData { [unowned self] (data, error) in
             if let error = error {
                 print(error)
-              } else {
-              if let data = data {
+            } else {
+                if let data = data {
                     self.completeLogin(data)
-              }
+                }
             }
-         }
-     }
+        }
+    }
 }
 
 
-    // Mark: - LoginViewController: UITextFieldDelegate
+// Mark: - LoginViewController: UITextFieldDelegate
 
 extension LoginViewController: UITextFieldDelegate {
     
@@ -201,52 +197,24 @@ private extension LoginViewController {
     func setUIEnabled(_ enabled: Bool) {
         
         performUIUpdatesOnMain {
-        self.emailTextField.isEnabled = enabled
-        self.passwordTextField.isEnabled = enabled
-        self.logInButton.isEnabled = enabled
-        self.debugTextLabel.text = ""
-        self.debugTextLabel.isEnabled = enabled
-        
+            self.emailTextField.isEnabled = enabled
+            self.passwordTextField.isEnabled = enabled
+            self.logInButton.isEnabled = enabled
+            self.debugTextLabel.text = ""
+            self.debugTextLabel.isEnabled = enabled
+            
             if enabled {
-            self.logInButton.alpha = 1.0
+                self.logInButton.alpha = 1.0
             } else {
-            self.logInButton.alpha = 0.5
+                self.logInButton.alpha = 0.5
             }
         }
         
-    
-  }
+        
+    }
 }
 
-/* Copy
- @IBAction func loginPressed(_ sender: AnyObject) {
- 
- userDidTapView(self)
- 
- if  emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
- debugTextLabel.text = "Enter your email and password."
- 
- } else {
- setUIEnabled(false)
- UdacityClient.sharedInstance().authenticateUser(email: emailTextField.text!, password: passwordTextField.text!) { [unowned self] (result, error) in
- self.setUIEnabled(true)
- 
- if let _ = result {
- self.getUserInfo()
- 
- } else {
- 
- if let error = error {
- 
- self.loginFailure(error)
- 
- }
- }
- }
- }
- }
- }
-  */
+
 // Sources:
 // Udacity IOS program (Network Requests & GCD), Udacity forums, and mentors
 

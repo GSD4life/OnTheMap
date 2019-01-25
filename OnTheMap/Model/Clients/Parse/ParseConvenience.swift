@@ -12,9 +12,9 @@ import Foundation
 extension ParseClient {
     
     
-   // Mark: Function used to get Student(s) location to populate MapView
-   func getStudentsLocation(_ completionHandlerForStudents: @escaping (_ result: [StudentInformation]?, _ error: NSError?) -> Void) {
-
+    // Mark: Function used to get Student(s) location to populate MapView
+    func getStudentsLocation(_ completionHandlerForStudents: @escaping (_ result: [StudentInformation]?, _ error: NSError?) -> Void) {
+        
         let _ = taskForGet { (results, error) in
             
             /* 3. Send the desired value(s) to completion handler */
@@ -33,20 +33,20 @@ extension ParseClient {
             }
         }
     }
-
+    
     // Mark: Function used to get a single student location. The response/data is formatted into the model (StudentInformation Struct) for a single person.
-     func getLocationForOneStudent(_ completionHandlerForOneStudent: @escaping (_ result: [StudentInformation]?, _ error: NSError?) -> Void) {
+    func getLocationForOneStudent(_ completionHandlerForOneStudent: @escaping (_ result: [StudentInformation]?, _ error: NSError?) -> Void) {
         
         let parameters = [Constants.queryName:Constants.queryValues, Constants.queryLimit: Constants.value, Constants.order:Constants.updatedAt]
         
         let _ = taskForStudent(parameters: parameters as [String:AnyObject], completionHandlerToGetLocation: { (results, error) in
-    
+            
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
                 completionHandlerForOneStudent(nil, error)
             } else {
                 
-                 if let results = results?[ParseClient.UsersLocation.studentsLocationResults] as? [[String:AnyObject]] {
+                if let results = results?[ParseClient.UsersLocation.studentsLocationResults] as? [[String:AnyObject]] {
                     
                     for (_, objectId) in results.enumerated() {
                         guard let objectId = objectId["objectId"] as? String else {
@@ -56,7 +56,7 @@ extension ParseClient {
                         StudentInformation.UserInfo.objectId = objectId
                     }
                     
-                   let result = StudentInformation.userDataFromResults(results)
+                    let result = StudentInformation.userDataFromResults(results)
                     completionHandlerForOneStudent(result, nil)
                     
                 } else {
@@ -64,7 +64,7 @@ extension ParseClient {
                 }
             }
         }
-    )}
+        )}
     
     // Mark: Function used to post a location to the server.
     func postingStudentLocation(mapString: String, mediaURL: String, latitude: Double, longitude: Double, _ completionHandlerForPostingLocation: @escaping (_ result: Any?, _ error: NSError?) -> Void) {
@@ -106,7 +106,7 @@ extension ParseClient {
             }
         }
     }
-
+    
 }
 
 // Sources:

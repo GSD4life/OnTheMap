@@ -10,15 +10,15 @@ import UIKit
 
 class StudentsTableViewController: UITableViewController {
     
- 
-
+    
+    
     @IBOutlet weak var mapsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         getTableInfo()
     }
@@ -40,8 +40,8 @@ class StudentsTableViewController: UITableViewController {
     
     func alert(error: NSError) {
         let ac = UIAlertController(title: "\(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-            present(ac, animated: true, completion: nil)
+        ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        present(ac, animated: true, completion: nil)
     }
     
     
@@ -51,7 +51,7 @@ class StudentsTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return StudentArrayDataSource.sharedInstance.arrayOfStudentInfo.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PinCell", for: indexPath)
@@ -64,7 +64,7 @@ class StudentsTableViewController: UITableViewController {
         cell.detailTextLabel?.text = mediaURL
         cell.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
         
-       return cell
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

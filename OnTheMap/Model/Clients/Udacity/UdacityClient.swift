@@ -14,7 +14,7 @@ class UdacityClient: NSObject {
     var lastName = ""
     var firstName = ""
     
-
+    
     // Mark: Networking code to login
     func login(email: String, password: String, completionHandlerForLogin: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> Void {
         
@@ -40,7 +40,7 @@ class UdacityClient: NSObject {
             
             /* GUARD: Was there an error? */
             guard (error == nil) else {
-                sendError("There was an error with your request: \(error!)")
+                sendError("There was an error with your request: \(error?.localizedDescription ?? "No internet connection")")
                 return
             }
             
@@ -58,7 +58,7 @@ class UdacityClient: NSObject {
             let range = (5..<data.count)
             let newData = data.subdata(in: range) /* subset response data! */
             print(String(data: newData, encoding: .utf8)!)
-           
+            
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandlerForLogin)
         }
@@ -93,7 +93,7 @@ class UdacityClient: NSObject {
             
             /* GUARD: Was there an error? */
             guard (error == nil) else {
-                sendError("There was an error with your request: \(error!)")
+                sendError("There was an error with your request: \(error?.localizedDescription ?? "Logout failure")")
                 return
             }
             
@@ -123,40 +123,40 @@ class UdacityClient: NSObject {
         
         //var userID = UdacityUser.uniqueKey
         
-    let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/users/\(userKey)")!)
-    let session = URLSession.shared
-    let task = session.dataTask(with: request) { data, response, error in
-        
-        func sendError(_ error: String) {
-            print(error)
-            let userInfo = [NSLocalizedDescriptionKey: error]
-            completionHandlerToGetData(nil, NSError(domain: "getUserData", code: 1, userInfo: userInfo))
-        }
-        
-        /* GUARD: Was there an error? */
-        guard (error == nil) else {
-            sendError("There was an error with your request: \(error!)")
-            return
-        }
-        
-        /* GUARD: Did we get a successful 2XX response? */
-        guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-            sendError("Your request returned a status code other than 2xx!")
-            return
-        }
-        
-        /* GUARD: Was there any data returned? */
-        guard let data = data else {
-            sendError("No data was returned by the request!")
-            return
-        }
-        let range = (5..<data.count)
-        let newData = data.subdata(in: range) /* subset response data! */
-        print(String(data: newData, encoding: .utf8)!)
-        
-        self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandlerToGetData)
-        
-        
+        let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/users/\(userKey)")!)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            
+            func sendError(_ error: String) {
+                print(error)
+                let userInfo = [NSLocalizedDescriptionKey: error]
+                completionHandlerToGetData(nil, NSError(domain: "getUserData", code: 1, userInfo: userInfo))
+            }
+            
+            /* GUARD: Was there an error? */
+            guard (error == nil) else {
+                sendError("There was an error with your request: \(error?.localizedDescription ?? "Unable to get user data")")
+                return
+            }
+            
+            /* GUARD: Did we get a successful 2XX response? */
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                sendError("Your request returned a status code other than 2xx!")
+                return
+            }
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                sendError("No data was returned by the request!")
+                return
+            }
+            let range = (5..<data.count)
+            let newData = data.subdata(in: range) /* subset response data! */
+            print(String(data: newData, encoding: .utf8)!)
+            
+            self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandlerToGetData)
+            
+            
         }
         
         task.resume()

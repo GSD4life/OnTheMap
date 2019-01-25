@@ -10,8 +10,8 @@ import UIKit
 
 class ManagerTabBarController: UITabBarController {
     
-var refresh = UIButton()
-
+    var refresh = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,13 +32,13 @@ var refresh = UIButton()
         plusSignButton.addTarget(self, action: #selector(moveToInformationPostingView), for: .touchUpInside)
         
         navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: plusSignButton), UIBarButtonItem(customView: refreshButton)]
-
+        
     }
     
-   @objc func refreshViewControllers() {
+    @objc func refreshViewControllers() {
         
-    if (self.selectedViewController?.isKind(of: MapViewController.self))! {
-             let controller = self.selectedViewController as! MapViewController
+        if (self.selectedViewController?.isKind(of: MapViewController.self))! {
+            let controller = self.selectedViewController as! MapViewController
             controller.getMapInfo()
         } else if (self.selectedViewController?.isKind(of: StudentsTableViewController.self))! {
             let controller = self.selectedViewController as! StudentsTableViewController
@@ -59,28 +59,28 @@ var refresh = UIButton()
     }
     
     @objc func logout() {
-     UdacityClient.sharedInstance().logout { [unowned self] (data, error) in
-        
-        if error != nil {
+        UdacityClient.sharedInstance().logout { [unowned self] (data, error) in
             
-            let alert = UIAlertController(title: "Logout Failed", message: "Please try again.", preferredStyle: .alert)
+            if error != nil {
+                
+                let alert = UIAlertController(title: "Logout Failed", message: "Please try again.", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+                
+                self.present(alert, animated: true)
+                
+            } else {
+                
+                self.cancel(sender: data!)
+            }
             
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
-            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
             
-            self.present(alert, animated: true)
-            
-        } else {
-            
-            self.cancel(sender: data!)
-        }
-        
-        
         }
     }
-
     
-
+    
+    
 }
 
 // Sources:
