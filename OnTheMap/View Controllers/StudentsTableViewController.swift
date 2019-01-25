@@ -14,10 +14,6 @@ class StudentsTableViewController: UITableViewController {
     
     @IBOutlet weak var mapsTableView: UITableView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         getTableInfo()
@@ -39,9 +35,9 @@ class StudentsTableViewController: UITableViewController {
     }
     
     func alert(error: NSError) {
-        let ac = UIAlertController(title: "\(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        present(ac, animated: true, completion: nil)
+        let activitiyIndicator = UIAlertController(title: "\(error.localizedDescription)", message: "The request failed", preferredStyle: .alert)
+        activitiyIndicator.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        present(activitiyIndicator, animated: true, completion: nil)
     }
     
     
