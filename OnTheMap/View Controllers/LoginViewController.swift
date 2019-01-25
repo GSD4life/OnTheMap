@@ -203,13 +203,10 @@ private extension LoginViewController {
             self.debugTextLabel.text = ""
             self.debugTextLabel.isEnabled = enabled
             
-            if enabled {
-                self.logInButton.alpha = 1.0
-            } else {
-                self.logInButton.alpha = 0.5
-            }
+            
+            self.logInButton.alpha = enabled ? 1.0 : 0.5
+            
         }
-        
         
     }
 }
