@@ -84,4 +84,4 @@ class ManagerTabBarController: UITabBarController {
 }
 
 // Sources:
-// Udacity IOS program (Network Requests & GCD), Udacity forums, and mentorsch.com).
+// Udacity IOS program (Network Requests & GCD), Udacity forums, and mentors).
